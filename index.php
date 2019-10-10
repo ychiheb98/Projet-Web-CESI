@@ -15,7 +15,7 @@
 <SECTION align="center"><A HREF="index.php"><IMG SRC="logo.png" alt="Home" id="logo"></IMG></A></SECTION>
 <SECTION>
 <MAIN>
-<B><P>We are available only at the following regions.<BR> Please select any one:</P></B></FONT>
+<B><P>We are available only at the followig regions.<BR> Please select any one:</P></B></FONT>
 <SECTION align="center"><IMG src="clickhere.gif" width="100" height="50"></IMG></SECTION>
 <TABLE >
 <TR><TD><FONT size="6"  color="white">
