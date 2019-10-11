@@ -1,0 +1,42 @@
+/*********************************************************************************
+
+	Template Name: Template full name  
+	Template URI: https://themeforest.net/user/
+	Description: Template description
+	Author: author name
+	Author URI: author uri
+	Version: 1.0
+
+	Note: This is main css. All plugins css files import here.
+
+**********************************************************************************/
+  .toInput::-webkit-input-placeholder {
+	color: #dae6d8;
+	font-size: 25px;
+  }
+  .toInput::-moz-placeholder {
+	color: #dae6d8;
+	font-size: 25px;
+  }
+  .toInput:-ms-input-placeholder {
+	color: #dae6d8;
+	font-size: 25px;
+  }
+  .toInput::placeholder {
+	color: #dae6d8;
+	font-size: 25px;
+  }
+  .toInput{
+	  color:violet;
+	  width: 60%;
+	  height: 60px;
+	  padding: 12px 20px;
+	  box-sizing: border-box;
+	  border: 2px solid #ccc;
+	  border-radius: 4px;
+	  background-color: #f8f8f8;
+	  resize: none;
+	  background: #fcfcfc; 
+	  border:1px solid #fcfcfc;
+	  margin-top: 30px;
+  }
