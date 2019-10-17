@@ -141,24 +141,31 @@ function validate()
 }
 </SCRIPT>
 </HEAD>
-<BODY  background="background3.jpg" link="white" alink="white" vlink="white">
+<BODY  background="background6.png" link="BLACK" alink="BLACK" vlink="BLACK">
 <FONT size="4"><NAV align="right">
 <A HREF="index.php">Home</A>&nbsp&nbsp&nbsp
 &nbsp<A HREF="help.php">Help</A>&nbsp&nbsp&nbsp<A HREF="register.php">Login/Register</A></FONT></NAV>
-<FORM name="register" method="post" action="register.php" onsubmit="return validate()">
-<TABLE border="1" bordercolor="white">
-<CAPTION><FONT size="6" color="WHITE">Enter your details:</FONT></CAPTION>
+<center>
+<FORM action="login.php">
+<P align="CENTER"><FONT size="6" color="BLACK" face="Arial">
+Already have an account with us?<BR></FONT><BR>
+<INPUT TYPE="submit" value="Login" id="login" class="button">
+</P>
+</FORM>
+<FORM name="register" method="post" action="register.php" onsubmit="return validate()" style="width:27%;">
+<TABLE border="2" bordercolor="BLACK" style=" background-image: url(background7.png);">
+<CAPTION style="text-align:center"><FONT size="6" color="BLACK">Enter your details:</FONT></CAPTION>
 <TR class="left">
-<TD><FONT size="5" color="WHITE">First name:</FONT></TD>
-<TD><INPUT name="fname" type="TEXT" placeholder="Enter your first name" size="30" maxlength="30" align="center" id="fname"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">First name:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT name="fname" type="TEXT" placeholder="Enter your first name" size="30" maxlength="30" align="center" id="fname"></TD>
 </TR>
 <TR class="left">
-<TD><FONT size="5" color="WHITE">Last name:</FONT></TD>
-<TD><INPUT type="TEXT" name="lname" align="center" size="30" maxlength="30" placeholder="Enter your last name" id="lname"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Last name:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT type="TEXT" name="lname" align="center" size="30" maxlength="30" placeholder="Enter your last name" id="lname"></TD>
 </TR>
 <TR class="left">
-<TD><FONT size="5" color="WHITE">Location:</FONT></TD>
-<TD><SELECT name="location" id="location" style="color:#d3d3d3;" onchange="document.postElementById('location').style.color='black';">
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Location:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><SELECT name="location" id="location" style="color:#d3d3d3;" onchange="document.postElementById('location').style.color='black';">
 <OPTION VALUE="none" disabled selected>-------SELECT YOUR LOCATION-------</OPTION>
 <OPTION VALUE="Kandivali West" style="color:black;">Kandivali West</OPTION>
 <OPTION VALUE="Kandivali East" style="color:black;">Kandivali East</OPTION>
@@ -167,39 +174,34 @@ function validate()
 </SELECT></TD>
 </TR>
 <TR class="left">
-<TD><FONT size="5" color="WHITE">Mobile Number:</FONT></TD>
-<TD><INPUT type="TEXT" name="mob" size="30" maxlength="10" placeholder="Enter your mobile number" id="mob"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Mobile Number:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT type="TEXT" name="mob" size="30" maxlength="10" placeholder="Enter your mobile number" id="mob"></TD>
 </TR>
 <TR class="left">
-<TD><FONT size="5" color="WHITE">Address:</FONT></TD>
-<TD class="left"><TEXTAREA rows="7" cols="33" wrap="physical" placeholder="Enter your address" id="addr" name="addr"></TEXTAREA></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Address:</FONT></TD>
+<TD class="left" style="border: 2px solid black;text-align:center"><TEXTAREA rows="7" cols="33" wrap="physical" placeholder="Enter your address" id="addr" name="addr"></TEXTAREA></TD>
 </TR>
 <TR class="left">
-<TD><FONT size="5" color="WHITE">E-Mail ID:</FONT></TD>
-<TD><INPUT name="email" type="TEXT" id="email" placeholder="Enter your E-Mail ID" size="30" maxlength="30"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">E-Mail ID:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT name="email" type="TEXT" id="email" placeholder="Enter your E-Mail ID" size="30" maxlength="30"></TD>
 </TR>
 <TR class="left">
-<TD><FONT size="5" color="WHITE">Password:</FONT></TD>
-<TD><INPUT type="PASSWORD" name="pw" size="30"  id="pw"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Password:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT type="PASSWORD" name="pw" size="30"  id="pw"></TD>
 </TR>
 <TR class="left">
-<TD><FONT size="5" color="WHITE">Confirm Password:</FONT></TD>
-<TD><INPUT type="PASSWORD" name="cpw" size="30" id="cpw"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Confirm Password:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT type="PASSWORD" name="cpw" size="30" id="cpw"></TD>
 </TR>
 <TR class="left">
-<TD colspan="2"><FONT size="4" color="WHITE">
+<TD colspan="2" style="border: 2px solid black;text-align:center"><FONT size="4" color="BLACK">
 <INPUT type="checkbox" name="tc" value="tc">
 I have read and accepted the Terms and Conditions and <BR>&nbsp&nbsp&nbsp&nbsp&nbspPrivacy Policy</FONT></TD>
 </TR>
-</TABLE>
+</TABLE><BR>
 <P><INPUT TYPE="Submit" value="Submit" name="submit" id="submit" class="button" onclick="if(!this.form.tc.checked){alert('You must agree to the terms first.');return false}">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <INPUT TYPE="Reset" value="Reset" id="reset" class="button"></P></FORM>
 <HR width="1000">
-<FORM action="login.php">
-<P align="CENTER"><FONT size="6" color="white" face="Arial">
-Already have an account with us?<BR></FONT>
-<INPUT TYPE="submit" value="Login" id="login" class="button">
-</P>
-</FORM>
+</center>
 </BODY>
 </HTML>

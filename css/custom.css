@@ -9,7 +9,6 @@
 
 	Note: This is main css. All plugins css files import here.
 
-<<<<<<< HEAD
 **********************************************************************************/
   .toInput::-webkit-input-placeholder {
 	color: #dae6d8;
@@ -41,6 +40,3 @@
 	  border:1px solid #fcfcfc;
 	  margin-top: 30px;
   }
-=======
-**********************************************************************************/
->>>>>>> develop

@@ -15,7 +15,7 @@
 </head>
 <body>
 <FONT size="4">
-<nav class=" navbar-right navbar-light" style="background-color:#c7c7c7;">
+<nav class=" navbar-right navbar-light" style="background-color:#737373;">
   <!-- Navbar content -->
 
 <A class="navbar-brand" HREF="index.php" style="padding-left:25px">Home</A>&nbsp&nbsp&nbsp
