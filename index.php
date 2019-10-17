@@ -42,7 +42,7 @@
                                 <div class="slider__content">
                                     <div class="slider__inner">
                                         <div class="slider__input">
-                                            <input type="text" placeholder="Type Place, City.Division">
+                                            <input type="text" placeholder="Type Place, City.Division" style="background: #83bf67; border: 1px solid #83bf67">
                                             <div class="src__btn">
                                                 <a href="#">Search</a>
                                         </div>
