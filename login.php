@@ -34,9 +34,17 @@ if(isset($_POST['']))
 <?php
 	$error = '';
 	if(isset($_POST['is_login'])){
-$sql = "SELECT * FROM ".$SETTINGS["USERS"]." WHERE `email` = '".mysql_real_escape_string($_POST['email'])."' AND `password` = '".mysql_real_escape_string($_POST['password'])."'";
-		$sql_result = mysql_query ($sql, $connection ) or die ('request "Could not execute SQL query" '.$sql);
-		$user = mysql_fetch_assoc($sql_result);
+		$sql = "SELECT * FROM ".$SETTINGS["USERS"]." WHERE `email` = '".$_POST['email']."' AND `password` = '".$_POST['password']."'";
+		
+		if(mysqli_query($connection, $sql))
+		{  
+			$user = mysqli_fetch_assoc(mysqli_query($connection, $sql));
+		}
+		else
+		{
+			$message = "Erreur d'exécution SQL : " . $sql ; 
+		}
+		
 		if(!empty($user)){
 			$_SESSION['user_info'] = $user['email'];
 		}

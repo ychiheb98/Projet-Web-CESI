@@ -1,40 +1,3 @@
-<?php
-session_start();
-$conn = mysqli_connect("localhost","root","","foodies");
-if(!$conn){  
-  die('Could not connect: '.mysqli_connect_error());  
-}
-if (isset($_POST['submit']))
-{
-$fname=$_POST['fname'];
-$lname=$_POST['lname'];
-$location=$_POST['location'];
-$mob=$_POST['mob'];
-$addr=$_POST['addr'];
-$email=$_POST['email'];
-$pw=$_POST['pw'];
-$cpw=$_POST['cpw'];
-$sql = "INSERT INTO user VALUES ('$fname', '$lname', '$location', '$mob', '$addr', '$email', '$pw', '$cpw');";
-	if(mysqli_query($conn, $sql))
-{  
-	$message = "You have been successfully registered";
-}
-else
-{  
-	$message = "Could not insert record"; 
-}
-	echo "<script type='text/javascript'>alert('$message');</script>";
-	$sql1 = "INSERT INTO php_users_login(`email`, `password`) VALUES ('$email', '$pw');";
-	if(mysqli_query($conn, $sql1))
-	{  
-		$message1 = "Added in login table";
-	}
-	else
-	{  
-		$message1 = "Could not insert record";
-	}	 
-	echo "<script type='text/javascript'>alert('$message1');</script>";}
-?>
 <HTML>
 <HEAD>
 <TITLE>Register-24X7 Foodies.com</TITLE>
@@ -152,9 +115,9 @@ Vous avez déjà un compte chez nous?<BR></FONT><BR>
 <INPUT TYPE="submit" value="Connexion" id="login" class="button" style="border-radius: 2px;width:120px;height:60px; background-color: #4CAF50; color: #242424;font-size: 20px; border: 2px solid #4CAF50; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
 </P>
 </FORM>
-<FORM name="register" method="post" action="register.php" onsubmit="return validate()" style="width:27%;">
+<FORM name="register" method="post" action="registerquery.php" onsubmit="return validate()" style="width:27%;">
 <TABLE border="2" bordercolor="BLACK" style=" background-image: url(background7.png); box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
-<CAPTION style="text-align:center"><FONT size="6" color="BLACK">Entre tes informations</FONT></CAPTION>
+<CAPTION style="text-align:center"><FONT size="6" color="BLACK">Entrez vos informations</FONT></CAPTION>
 <TR class="left">
 <TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Prénom</FONT></TD>
 <TD style="border: 2px solid black;text-align:center"><INPUT name="fname" type="TEXT" placeholder="Entre ton prénom" size="30" maxlength="30" align="center" id="fname"  style="border-radius: 5px;"></TD>
@@ -166,11 +129,11 @@ Vous avez déjà un compte chez nous?<BR></FONT><BR>
 <TR class="left">
 <TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Emplacement:</FONT></TD>
 <TD style="border: 2px solid black;text-align:center"><SELECT name="location" id="location" style="color:#d3d3d3; border-radius: 5px;" onchange="document.postElementById('location').style.color='black';">
-<OPTION VALUE="none" disabled selected>-------Selectionne ton emplacement :-------</OPTION>
-<OPTION VALUE="Kandivali West" style="color:black;">Bordeaux</OPTION>
-<OPTION VALUE="Kandivali East" style="color:black;">Mérignac</OPTION>
-<OPTION VALUE="Borivali East" style="color:black;">Pessac</OPTION>
-<OPTION VALUE="Borivali West" style="color:black;">Bruges</OPTION>
+<OPTION VALUE="none" disabled selected>-------Sélectionnez votre emplacement :-------</OPTION>
+<OPTION VALUE="Bordeaux" style="color:black;">Bordeaux</OPTION>
+<OPTION VALUE="Mérignac" style="color:black;">Mérignac</OPTION>
+<OPTION VALUE="Pessac" style="color:black;">Pessac</OPTION>
+<OPTION VALUE="Bruges" style="color:black;">Bruges</OPTION>
 </SELECT></TD>
 </TR>
 <TR class="left">
@@ -190,7 +153,7 @@ Vous avez déjà un compte chez nous?<BR></FONT><BR>
 <TD style="border: 2px solid black;text-align:center"><INPUT type="PASSWORD" name="pw" size="30" id="pw" style="border-radius: 5px;"></TD>
 </TR>
 <TR class="left">
-<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Confirme mot de passe:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Confirmez votre mot de passe:</FONT></TD>
 <TD style="border: 2px solid black;text-align:center"><INPUT type="PASSWORD" name="cpw" size="30" id="cpw" style="border-radius: 5px;"></TD>
 </TR>
 <TR class="left">
