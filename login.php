@@ -63,14 +63,14 @@ $_SESSION['userName'] = 'Root';		$_COOKIE['varname'] = 9;	?>
 
 	        <div id="form-content">
 	            <div class="welcome">
-				Bienvenue, vous êtes connecté.
-                    <br />
+				<h3>Bienvenue, vous êtes connectés.</h3>
 					Merci de nous avoir choisi.					
-					<br />
-					<center><a href="order.php" style="color:#3ec038">Commander</a></center>
-					<center><a href="changepw.php" style="color:#3ec038">Change ton password</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="deact.php" style="color:#3ec038">Désactive ton compte</a></center><br /><br/>
-					<section align="right"><a href="login.php?ac=logout" style="color:#3ec038">Déconnecter</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</section>
+					<br /><br>
+					<INPUT TYPE="Reset" value="Commander" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:10px;" onclick="window.location='order.php';">
+					<INPUT TYPE="Reset" value="Panier" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:10px;" onclick="window.location='cartpage.php';">
+					<INPUT TYPE="Reset" value="Change ton password" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:10px;" onclick="window.location='#';">
+					<INPUT TYPE="Reset" value="Désactive ton compte" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:10px;margin-left:50px;" onclick="window.location='#';">
+					<INPUT TYPE="Reset" value="Déconnecter" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:10px;" onclick="window.location='logout.php';">
 				</div>	
 	        </div>
 	    </form>
