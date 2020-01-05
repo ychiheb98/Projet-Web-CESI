@@ -1,7 +1,7 @@
 <HTML class="no-js" lang="zxx">
 <HEAD>
 <meta charset="utf-8">
-<TITLE>green therapie</TITLE>
+<TITLE>Green Therapy</TITLE>
 <!-- Favicons -->
 <link rel="shortcut icon" href="images/favicon.ico">
 	<link rel="apple-touch-icon" href="images/icon.png">

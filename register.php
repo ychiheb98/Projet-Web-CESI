@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Register-24X7 Foodies.com</TITLE>
+<TITLE>Inscription Green Therapy</TITLE>
 <LINK REL="STYLESHEET" HREF="STYLE.CSS">
 <SCRIPT type="text/javascript">
 function validate()

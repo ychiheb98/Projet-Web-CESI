@@ -1,47 +1,7 @@
-<?php 
-include("config.php");
-session_start();
-if (isset($_POST['submit'])){
-	if(!empty($_SESSION['user_info'])) {
-		$qty1=$_POST['qty1'];
-		$qty2=$_POST['qty2'];
-		$qty3=$_POST['qty3'];
-		$qty4=$_POST['qty4'];
-		$qty5=$_POST['qty5'];
-		$qty6=$_POST['qty6'];
-		$qty7=$_POST['qty7'];
-		$qty8=$_POST['qty8'];
-		$qty9=$_POST['qty9'];
-		$user_info=$_SESSION['user_info'];
-		$sum=30*$qty1+60*$qty2+30*$qty3+180*$qty4+350*$qty5+200*$qty6+300*$qty7+250*$qty8+270*$qty9;
-		$msg="Commande passée avec succès. Veuillez effectuer un paiement ".$sum." en espèces lors de la réception";
-		/* Vérification de la connexion */
-		if (mysqli_connect_errno()) {
-			printf("Echec de la connexion : %s\n", mysqli_connect_error());
-			exit();
-		}
 
-		$sql1="INSERT INTO orders(email,qty1,qty2,qty3,qty4,qty5,qty6,qty7,qty8,qty9)VALUES('$user_info','$qty1','$qty2','$qty3','$qty4','$qty5','$qty6','$qty7','$qty8','$qty9');";
-		
-		if(mysqli_query($connection ,$sql1, MYSQLI_USE_RESULT) === TRUE)
-		{  
-
-			echo '<script type="text/javascript"> alert("'.$msg.'")</script>';
-		}
-		else
-		{ 
-			echo $sql1;
-			echo("Erreur description: " . mysqli_error($connection));
-			echo "<script type='text/javascript'>alert('Impossible de passer la commande');</script>";
-		} 
-	}
-	else
-		echo "<script type='text/javascript'>alert('Connexion nécessaire');</script>";
-}
-?>
 <html>
 <head>
-<title>Order</title>
+<title>Commandes</title>
 <style type="text/css">
 @import url(style.css);
    a:link {color: #ffffff}
@@ -52,7 +12,10 @@ if (isset($_POST['submit'])){
 img{width:300; height:200;}
 table{border-color:white;height:90%;}
 img{border-color:white}
-body{no-repeat center center fixed; 
+body{
+		background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -78,7 +41,7 @@ body{no-repeat center center fixed;
 		var qty9=document.getElementById("qty9");
 		if((qty1.value=='' && qty2.value=='' && qty3.value=='' && qty4.value=='' &&qty5.value=='' && qty6.value=='' && qty7.value=='' && qty8.value=='' &&qty9.value=='')||(qty1.value=='0' && qty2.value=='0' && qty3.value=='0' && qty4.value=='0' && qty5.value=='0' && qty6.value=='0' && qty7.value=='0' && qty8.value=='0' && qty9.value=='0' ))
 		{
-			alert("Please select atleast 1 item");
+			alert("Séléctionnez au moins 1 élément");
 			return false;
 		}
 		return true;	
@@ -97,7 +60,7 @@ else
 	echo '<A HREF="register.php" style="color:black;">Connexion/Inscription</A>';
 ?>
 </FONT></NAV>
-<form action="order.php" name="orderform" method="post">
+<form action="orderquery.php" name="orderform" method="post">
 <table cellspacing="5" cellpadding="2" align="center" style="width:35%;margin:auto">
 <caption style="text-align:center;"><font size="5" style="color:black;"><U>Commander ici</U></font></caption>
 <tr><td style="border-top: 1px solid #000000;">
@@ -135,7 +98,7 @@ else
 <font size="4" style="color:black;">25€</font>
 </td><td style="border-top: 1px solid #000000;">
 <img src="menu/chocolat.jpg" width="300" height="200" border="2"><br/>
-<font size="4" style="color:black;">Chocolat</font>
+<font size="4" style="color:black;">Chocolat infusé</font>
 &nbsp;&nbsp;<input type='text' name='qty5' id='qty5' size="1" maxlength="2" class="qty" style="width: 25px;"/>
 			<input type='button' name='add' onclick='javascript: document.getElementById("qty5").value++;' value='+'/>
 			<input type='button' name='subtract' onclick='javascript: subtractQty(qty5);' value='-'/>
