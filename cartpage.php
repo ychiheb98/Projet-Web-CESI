@@ -82,7 +82,7 @@
                           </th>
                           <td class="border-0 align-middle"><strong><?php echo $price . "€" ;?></strong></td>
                           <td class="border-0 align-middle"><strong><?php echo $qtyValue ;?></strong></td>
-                          <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                          <td class="border-0 align-middle"><a href="deleteorder.php?idQty='qty1'" class="text-dark"><i class="fa fa-trash"></i></a>
                         </tr>
                       <?php
                       }
@@ -101,8 +101,7 @@
                         </th>
                         <td class="border-0 align-middle"><strong><?php echo $price . "€" ;?></strong></td>
                         <td class="border-0 align-middle"><strong><?php echo $qtyValue ;?></strong></td>
-                        <td class="border-0 align-middle"><a href="deleteorder.php" class="text-dark">        
-                          <i class="fa fa-trash"></i></a>
+                        <td class="border-0 align-middle"><a href="deleteorder.php?idQty='qty2'" class="text-dark"><i class="fa fa-trash"></i></a>
                         </td>
                       </tr>
                       <?php
@@ -122,7 +121,7 @@
                         </th>
                         <td class="border-0 align-middle"><strong><?php echo $price . "€" ;?></strong></td>
                         <td class="border-0 align-middle"><strong><?php echo $qtyValue ;?></strong></td>
-                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                        <td class="border-0 align-middle"><a href="deleteorder.php?idQty='qty3'" class="text-dark"><i class="fa fa-trash"></i></a>
                       </tr>
                       <?php
                       }
@@ -133,7 +132,7 @@
                         <tr>
                         <th scope="row" class="border-0">
                           <div class="p-2">
-                            <img src="menu\eliquide.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                            <img src="menu\eliquid.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
                             <div class="ml-3 d-inline-block align-middle">
                               <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">E-Liquide</a></h5><span class="text-muted font-weight-normal font-italic d-block">Catégorie: HIGH-TECH</span>
                             </div>
@@ -141,7 +140,7 @@
                         </th>
                         <td class="border-0 align-middle"><strong><?php echo $price . "€" ;?></strong></td>
                         <td class="border-0 align-middle"><strong><?php echo $qtyValue ;?></strong></td>
-                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                        <td class="border-0 align-middle"><a href="deleteorder.php?idQty='qty4'" class="text-dark"><i class="fa fa-trash"></i></a>
                       </tr>
                       <?php
                       }
@@ -160,7 +159,7 @@
                         </th>
                         <td class="border-0 align-middle"><strong><?php echo $price . "€" ;?></strong></td>
                         <td class="border-0 align-middle"><strong><?php echo $qtyValue ;?></strong></td>
-                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                        <td class="border-0 align-middle"><a href="deleteorder.php?idQty='qty5'" class="text-dark"><i class="fa fa-trash"></i></a>
                       </tr>
                       <?php
                       }
@@ -171,7 +170,7 @@
                         <tr>
                         <th scope="row" class="border-0">
                           <div class="p-2">
-                            <img src="menu\infusion.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                            <img src="menu\infusion.png" alt="" width="70" class="img-fluid rounded shadow-sm">
                             <div class="ml-3 d-inline-block align-middle">
                               <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Infusion</a></h5><span class="text-muted font-weight-normal font-italic d-block">Catégorie: Infusion</span>
                             </div>
@@ -179,7 +178,7 @@
                         </th>
                         <td class="border-0 align-middle"><strong><?php echo $price . "€" ;?></strong></td>
                         <td class="border-0 align-middle"><strong><?php echo $qtyValue ;?></strong></td>
-                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                        <td class="border-0 align-middle"><a href="deleteorder.php?idQty='qty6'" class="text-dark"><i class="fa fa-trash"></i></a>
                       </tr>
                       <?php
                       }
@@ -198,7 +197,7 @@
                         </th>
                         <td class="border-0 align-middle"><strong><?php echo $price . "€" ;?></strong></td>
                         <td class="border-0 align-middle"><strong><?php echo $qtyValue ;?></strong></td>
-                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                        <td class="border-0 align-middle"><a href="deleteorder.php?idQty='qty7'" class="text-dark"><i class="fa fa-trash"></i></a>
                       </tr>
                       <?php
                       }
@@ -217,7 +216,7 @@
                         </th>
                         <td class="border-0 align-middle"><strong><?php echo $price . "€" ;?></strong></td>
                         <td class="border-0 align-middle"><strong><?php echo $qtyValue ;?></strong></td>
-                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                        <td class="border-0 align-middle"><a href="deleteorder.php?idQty='qty8'" class="text-dark"><i class="fa fa-trash"></i></a>
                       </tr>
                       <?php
                       }
@@ -236,7 +235,7 @@
                         </th>
                         <td class="border-0 align-middle"><strong><?php echo $price . "€" ;?></strong></td>
                         <td class="border-0 align-middle"><strong><?php echo $qtyValue ;?></strong></td>
-                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                        <td class="border-0 align-middle"><a href="deleteorder.php?idQty='qty9'" class="text-dark"><i class="fa fa-trash"></i></a>
                       </tr>
                       <?php
                       }
@@ -252,7 +251,7 @@
 
       <div class="row py-5 p-4 bg-white rounded shadow-sm">
         <div class="col-lg-6">
-          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Code Coupon</div>
           <div class="p-4">
             <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
             <div class="input-group mb-4 border rounded-pill p-2">
