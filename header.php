@@ -63,6 +63,8 @@ if(isset($_SESSION['user_info']))
       if($order['qty8'] > 0){ $counter = $counter + 1; }
       if($order['qty9'] > 0){ $counter = $counter + 1; }
 
+      $_SESSION['counter'] = $counter;
+
       echo '<A HREF="cartpage.php" style="margin-left: 850px;"> Panier ('.$counter.')</a>';
 
     }
