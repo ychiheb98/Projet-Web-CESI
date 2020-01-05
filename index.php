@@ -30,7 +30,7 @@
 <SECTION align="center"><A HREF="index.php"><IMG SRC="img/LogoMakr_8lqnaO.png" alt="Home" id="logo" style="height: 200px;"></IMG></A></SECTION>
 <SECTION>
 <MAIN>
-<B style="text-align:center"><P>We are available only at the following regions.<BR> Please select any one:</P></B></FONT>
+<B style="text-align:center"><P>Nous sommes disponibles uniquement dans la région bordelaise.<BR> Veuillez sélectionner votre ville:</P></B></FONT>
 <!-- <SECTION align="center"><IMG src="clickhere.gif" width="100" height="50"></IMG></SECTION> -->
 <div class="slider__area slider--one">
             <div class="slider__activation--1">
@@ -42,9 +42,9 @@
                                 <div class="slider__content">
                                     <div class="slider__inner">
                                         <div class="slider__input">
-                                            <input type="text" placeholder="Type Place, City.Division" style="background: #83bf67; border: 1px solid #83bf67">
+                                            <input type="text" placeholder="Exemple : Bordeaux" style="background: #83bf67; border: 1px solid #83bf67">
                                             <div class="src__btn">
-                                                <a href="#" style="background: #83bf67;">Search</a>
+                                                <a href="#" style="background: #83bf67;">Rechercher</a>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
 </MAIN><BR>
 <FOOTER style="bottom: 0;position: fixed;" >
 <FONT size="2" color="white">
-By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. &copy 2015-2016 - 24x7 Foodies Media Pvt Ltd. All rights reserved.</FONT>
+En poursuivant votre navigation sur cette page, vous acceptez nos conditions d'utilisation, notre politique en matière de cookies, notre politique de confidentialité et nos politiques de contenu. Tous droits réservés.</FONT>
 </FOOTER>
 </BODY>
 </HTML>

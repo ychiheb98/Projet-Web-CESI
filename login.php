@@ -41,7 +41,7 @@ $sql = "SELECT * FROM ".$SETTINGS["USERS"]." WHERE `email` = '".mysql_real_escap
 			$_SESSION['user_info'] = $user['email'];
 		}
 		else{
-			$error = 'Wrong email or password.';
+			$error = 'Email or password invalide.';
 		}
 	}
 	if(isset($_GET['ac']) && $_GET['ac'] == 'logout'){
@@ -55,29 +55,29 @@ $_SESSION['userName'] = 'Root';		$_COOKIE['varname'] = 9;	?>
 
 	        <div id="form-content">
 	            <div class="welcome">
-					Welcome, you are logged in. 
+				Bienvenue, vous êtes connecté.
                     <br />
-					Thank you for choosing us.
+					Merci de nous avoir choisi.					
 					<br />
-					<center><a href="order.php" style="color:#3ec038">Place an order</a></center>
-					<center><a href="changepw.php" style="color:#3ec038">Change password</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="deact.php" style="color:#3ec038">Deactivate your account</a></center><br /><br/>
-					<section align="right"><a href="login.php?ac=logout" style="color:#3ec038">Logout</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</section>
+					<center><a href="order.php" style="color:#3ec038">Commander</a></center>
+					<center><a href="changepw.php" style="color:#3ec038">Change ton password</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="deact.php" style="color:#3ec038">Désactive ton compte</a></center><br /><br/>
+					<section align="right"><a href="login.php?ac=logout" style="color:#3ec038">Déconnecter</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</section>
 				</div>	
 	        </div>
 	    </form>
 	<?php } else { ?>
 	    <form id="login-form" class="login-form" name="form1" method="post" action="login.php">
 	    	<input type="hidden" name="is_login" value="1">
-	        <div class="h1">Login</div>
+	        <div class="h1">Connecter</div>
 	        <div id="form-content">
 	            <div class="group">
 	                <label for="email">Email</label>
 	                <div><input id="email" name="email" class="form-control required" type="email" placeholder="Email"></div>
 	            </div>
 	           <div class="group">
-	                <label for="name">Password</label>
-	                <div><input id="password" name="password" class="form-control required" type="password" placeholder="Password"></div>
+	                <label for="name">Mot de passe</label>
+	                <div><input id="password" name="password" class="form-control required" type="password" placeholder="Passwor"></div>
 	            </div>
 	            <?php if($error) { ?>
 	                <em>
@@ -86,7 +86,7 @@ $_SESSION['userName'] = 'Root';		$_COOKIE['varname'] = 9;	?>
 				<?php } ?>
 	            <div class="group submit">
 	                <label class="empty"></label>
-	                <div><input name="submit" type="submit" value="Submit"/></div>
+	                <div><input name="submit" type="submit" value="Envoyer"/></div>
 	            </div>
 	        </div>
 	        <div id="form-loading" class="hide"><i class="fa fa-circle-o-notch fa-spin"></i></div>

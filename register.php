@@ -55,152 +55,152 @@ function validate()
     var dotpos = EmailId.value.lastIndexOf(".");
  	if(pw.value.length< 8 || cpw.value.length< 8)
 	{
-		alert("Please enter a password of atleast 8 characters");
+		alert("Veuillez saisir un mot de passe d'au moins 8 caractères");
 		pw.focus();
 		return false;
 	}
 	else if (pw.value.length != cpw.value.length) 
 	{
-		alert("Passwords do not match.");
+		alert("Les mots de passe ne correspondent pas.");
 		pw.focus();
         return false;
     }
 	else if (pw.value != cpw.value) 
 	{
-		alert("Passwords do not match.");
+		alert("Les mots de passe ne correspondent pas.");
 		pw.focus();
         return false;
     }
 	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=EmailId.value.length) 
 	{
-        alert("Enter valid email-ID");
+        alert("Entrer un email valide");
 		EmailId.focus();
         return false;
    	}
 	if(fname.value==null || fname.value=="")
 	{
 		fname.focus();
-		alert("Enter valid first name");
+		alert("Entrez un prénom valide");
 		return false;
 	}
 	if(fname.value.match(alphaExp)){}
 	else{
-		alert("First name can have only letters");
+		alert("Le prénom ne peut avoir que des lettres");
 		fname.focus();
 		return false;
 	}
 	if(lname.value==null || lname.value=="")
 	{
 		lname.focus();
-		alert("Enter valid last name");
+		alert("Entrez un nom de famille valide");
 		return false;
 	}
 	if(lname.value.match(alphaExp)){}
 	else{
-		alert("Last name can have only letters");
+		alert("Le nom de famille ne peut contenir que des lettres");
 		lname.focus();
 		return false;
 	}
 	if(mob.value==null || mob.value==" ")
 	{
-		alert("Please Enter Mobile Number");
+		alert("Veuillez entrer le numéro de portable");
 		mob.focus();
 		return false;
 	}
 	if (isNaN(mob.value))
 	{
-		alert(" Your Mobile Number must be Integers");
+		alert("Votre numéro de mobile doit être des nombres entiers");
 		mob.focus();
 		return false;
 	}
 	if((mob.value.length!= 10))
 	{
-		alert("Enter the valid Mobile Number(Like : 9669666999)");
+		alert("Entrez le numéro de mobile valide (comme: 0610111213)");
 		mob.focus();
 		return false;
 	}
 	if(location.selectedIndex==0)
 	{
-		alert("Please select location");
+		alert("Veuillez sélectionner un lieu");
 		location.focus();
 		return false;		
 	}
 	if(addr.value==" " || addr.value=="")
 	{
-		alert("Please Enter Your Address");
+		alert("Veuillez entrer votre adresse");
 		addr.focus();
 		return false;
 	}
-	if (confirm("Do you want to submit your details?") == true) {} 
+	if (confirm("Souhaitez-vous soumettre vos informations?") == true) {} 
 	else 
 	{
        return false;
     }
-    var survey=prompt("How did you hear about us? (Used only for survey)");
+    var survey=prompt("Comment avez-vous entendu parler de nous? (Utilisé uniquement pour l'enquête)");
 	return true;
 }
 </SCRIPT>
 </HEAD>
 <BODY  background="background6.png" link="BLACK" alink="BLACK" vlink="BLACK">
 <FONT size="4"><NAV align="right">
-<A HREF="index.php">Home</A>&nbsp&nbsp&nbsp
-&nbsp<A HREF="help.php">Help</A>&nbsp&nbsp&nbsp<A HREF="register.php">Login/Register</A></FONT></NAV>
+<A HREF="index.php">Accueil</A>&nbsp&nbsp&nbsp
+&nbsp<A HREF="help.php">Aide</A>&nbsp&nbsp&nbsp<A HREF="register.php">Connexion/Inscription</A></FONT></NAV>
 <center>
 <FORM action="login.php">
 <P align="CENTER"><FONT size="6" color="BLACK" face="Arial">
-Already have an account with us?<BR></FONT><BR>
-<INPUT TYPE="submit" value="LOGIN" id="login" class="button" style="border-radius: 2px;width:120px;height:60px; background-color: #4CAF50; color: #242424;font-size: 20px; border: 2px solid #4CAF50; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
+Vous avez déjà un compte chez nous?<BR></FONT><BR>
+<INPUT TYPE="submit" value="Connexion" id="login" class="button" style="border-radius: 2px;width:120px;height:60px; background-color: #4CAF50; color: #242424;font-size: 20px; border: 2px solid #4CAF50; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
 </P>
 </FORM>
 <FORM name="register" method="post" action="register.php" onsubmit="return validate()" style="width:27%;">
 <TABLE border="2" bordercolor="BLACK" style=" background-image: url(background7.png); box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
-<CAPTION style="text-align:center"><FONT size="6" color="BLACK">Enter your details:</FONT></CAPTION>
+<CAPTION style="text-align:center"><FONT size="6" color="BLACK">Entre tes informations</FONT></CAPTION>
 <TR class="left">
-<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">First name:</FONT></TD>
-<TD style="border: 2px solid black;text-align:center"><INPUT name="fname" type="TEXT" placeholder="Enter your first name" size="30" maxlength="30" align="center" id="fname"  style="border-radius: 5px;"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Prénom</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT name="fname" type="TEXT" placeholder="Entre ton prénom" size="30" maxlength="30" align="center" id="fname"  style="border-radius: 5px;"></TD>
 </TR>
 <TR class="left">
-<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Last name:</FONT></TD>
-<TD style="border: 2px solid black;text-align:center"><INPUT type="TEXT" name="lname" align="center" size="30" maxlength="30" placeholder="Enter your last name" id="lname" style="border-radius: 5px;"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Nom de famille:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT type="TEXT" name="lname" align="center" size="30" maxlength="30" placeholder="Entre ton nom de famille" id="lname" style="border-radius: 5px;"></TD>
 </TR>
 <TR class="left">
-<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Location:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Emplacement:</FONT></TD>
 <TD style="border: 2px solid black;text-align:center"><SELECT name="location" id="location" style="color:#d3d3d3; border-radius: 5px;" onchange="document.postElementById('location').style.color='black';">
-<OPTION VALUE="none" disabled selected>-------SELECT YOUR LOCATION-------</OPTION>
-<OPTION VALUE="Kandivali West" style="color:black;">Kandivali West</OPTION>
-<OPTION VALUE="Kandivali East" style="color:black;">Kandivali East</OPTION>
-<OPTION VALUE="Borivali East" style="color:black;">Borivali East</OPTION>
-<OPTION VALUE="Borivali West" style="color:black;">Borivali West</OPTION>
+<OPTION VALUE="none" disabled selected>-------Selectionne ton emplacement :-------</OPTION>
+<OPTION VALUE="Kandivali West" style="color:black;">Bordeaux</OPTION>
+<OPTION VALUE="Kandivali East" style="color:black;">Mérignac</OPTION>
+<OPTION VALUE="Borivali East" style="color:black;">Pessac</OPTION>
+<OPTION VALUE="Borivali West" style="color:black;">Bruges</OPTION>
 </SELECT></TD>
 </TR>
 <TR class="left">
-<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Mobile Number:</FONT></TD>
-<TD style="border: 2px solid black;text-align:center"><INPUT type="TEXT" name="mob" size="30" maxlength="10" placeholder="Enter your mobile number" id="mob" style="border-radius: 5px;"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Téléphone:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT type="TEXT" name="mob" size="30" maxlength="10" placeholder="Ente ton téléphone" id="mob" style="border-radius: 5px;"></TD>
 </TR>
 <TR class="left">
-<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Address:</FONT></TD>
-<TD class="left" style="border: 2px solid black;text-align:center"><TEXTAREA rows="7" cols="33" wrap="physical" placeholder="Enter your address" id="addr" name="addr" style="border-radius: 5px;"></TEXTAREA></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Adresse:</FONT></TD>
+<TD class="left" style="border: 2px solid black;text-align:center"><TEXTAREA rows="7" cols="33" wrap="physical" placeholder="Entre ton adresse"addr" name="addr" style="border-radius: 5px;"></TEXTAREA></TD>
 </TR>
 <TR class="left">
-<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">E-Mail ID:</FONT></TD>
-<TD style="border: 2px solid black;text-align:center"><INPUT name="email" type="TEXT" id="email" placeholder="Enter your E-Mail ID" size="30" maxlength="30" style="border-radius: 5px;"></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">E-Mail :</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><INPUT name="email" type="TEXT" id="email" placeholder="Entre ton E-mail" size="30" maxlength="30" style="border-radius: 5px;"></TD>
 </TR>
 <TR class="left">
-<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Password:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Mot de passe:</FONT></TD>
 <TD style="border: 2px solid black;text-align:center"><INPUT type="PASSWORD" name="pw" size="30" id="pw" style="border-radius: 5px;"></TD>
 </TR>
 <TR class="left">
-<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Confirm Password:</FONT></TD>
+<TD style="border: 2px solid black;text-align:center"><FONT size="5" color="BLACK">Confirme mot de passe:</FONT></TD>
 <TD style="border: 2px solid black;text-align:center"><INPUT type="PASSWORD" name="cpw" size="30" id="cpw" style="border-radius: 5px;"></TD>
 </TR>
 <TR class="left">
 <TD colspan="2" style="border: 2px solid black;text-align:center"><FONT size="4" color="BLACK">
 <INPUT type="checkbox" name="tc" value="tc" style="border-radius: 5px;">
-I have read and accepted the Terms and Conditions and <BR>&nbsp&nbsp&nbsp&nbsp&nbspPrivacy Policy</FONT></TD>
+J'ai lu et accepté les Termes et Conditions et <BR>&nbsp&nbsp&nbsp&nbsp&nbspla politique de confidentialité</FONT></TD>
 </TR>
 </TABLE><BR>
-<P><INPUT TYPE="Submit" value="Submit" id="submit" onclick="if(!this.form.tc.checked){alert('You must agree to the terms first.');return false}" class="button" style="border-radius: 2px;width:120px;height:60px; background-color: #4CAF50; color: #242424;font-size: 20px; border: 2px solid #4CAF50; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
-<INPUT TYPE="Reset" value="Reset" id="reset" class="button" style="border-radius: 2px;width:120px;height:60px; background-color: #4CAF50; color: #242424;font-size: 20px; border: 2px solid #4CAF50; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
+<P><INPUT TYPE="Submit" value="Confirmer" id="submit" onclick="if(!this.form.tc.checked){alert('Vous devez accepter les conditions.');return false}" class="button" style="border-radius: 2px;width:120px;height:60px; background-color: #4CAF50; color: #242424;font-size: 20px; border: 2px solid #4CAF50; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
+<INPUT TYPE="Reset" value="Annuler" id="reset" class="button" style="border-radius: 2px;width:120px;height:60px; background-color: #4CAF50; color: #242424;font-size: 20px; border: 2px solid #4CAF50; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
 </P></FORM>
 <HR width="1000">
 </center>

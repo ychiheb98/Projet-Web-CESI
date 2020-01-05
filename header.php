@@ -18,14 +18,14 @@
 <nav class=" navbar-right navbar-light" style="background-color:#737373;">
   <!-- Navbar content -->
 
-<A class="navbar-brand" HREF="index.php" style="padding-left:25px">Home</A>&nbsp&nbsp&nbsp
-<A class="navbar-brand" HREF="help.php">Help</A>&nbsp&nbsp&nbsp
+<A class="navbar-brand" HREF="index.php" style="padding-left:25px">Accueil</A>&nbsp&nbsp&nbsp
+<A class="navbar-brand" HREF="help.php">Aide</A>&nbsp&nbsp&nbsp
 <?php  
 session_start();
 if(isset($_SESSION['user_info']))
 	echo 'Welcome <A HREF="login.php"> '.$_SESSION['user_info'].'</a>';
 else
-	echo '<A class="navbar-brand" HREF="register.php">Login/Register</A>';
+	echo '<A class="navbar-brand" HREF="register.php">Connexion/Inscription</A>';
 ?> 
 </FONT></nav>
 </body>
