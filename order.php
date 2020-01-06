@@ -54,6 +54,7 @@ body{
 <A HREF="index.php" style="color:black;">Accueil</A>&nbsp&nbsp&nbsp
 <A HREF="help.php" style="color:black;">Aide</A>&nbsp&nbsp&nbsp
 <?php  
+session_start();
 if(isset($_SESSION['user_info']))
 	echo 'Bienvenue <A HREF="login.php"> '.$_SESSION['user_info'].'</a>';
 else

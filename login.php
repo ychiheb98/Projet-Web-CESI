@@ -64,28 +64,28 @@ $_SESSION['userName'] = 'Root';		$_COOKIE['varname'] = 9;	?>
 	        <div id="form-content">
 	            <div class="welcome">
 				<h3>Bienvenue, vous êtes connectés.</h3>
-					Merci de nous avoir choisi.					
+					Merci de nous avoir choisi! 					
 					<br /><br>
-					<INPUT TYPE="Reset" value="Commander" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:8px;" onclick="window.location='order.php';">
+					<INPUT TYPE="Reset" value="Commandez" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:8px;" onclick="window.location='order.php';">
 					<INPUT TYPE="Reset" value= <?php echo "Panier(" . $_SESSION['counter'] . ")" ?> id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:8px;" onclick="window.location='cartpage.php';">
-					<INPUT TYPE="Reset" value="Change ton password" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:8px;" onclick="window.location='#';">
-					<INPUT TYPE="Reset" value="Désactive ton compte" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:8px;margin-left:50px;" onclick="window.location='#';">
-					<INPUT TYPE="Reset" value="Déconnecter" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:8px;" onclick="window.location='logout.php';">
+					<INPUT TYPE="Reset" value="Changez le MDP" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:8px;" onclick="window.location='#';">
+					<INPUT TYPE="Reset" value="Désactivez votre compte" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:8px;margin-left:50px;" onclick="window.location='#';">
+					<INPUT TYPE="Reset" value="Se Déconnecter" id="reset" class="button" style="border-radius: 2px;width:auto;height:auto; background-color: #cef2d1; color: black;font-size: 20px; border: 2px solid #cef2d1; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); margin:8px;" onclick="window.location='logout.php';">
 				</div>	
 	        </div>
 	    </form>
 	<?php } else { ?>
 	    <form id="login-form" class="login-form" name="form1" method="post" action="login.php">
 	    	<input type="hidden" name="is_login" value="1">
-	        <div class="h1">Connecter</div>
+	        <div class="h1">Authentification</div>
 	        <div id="form-content">
 	            <div class="group">
 	                <label for="email">Email</label>
-	                <div><input id="email" name="email" class="form-control required" type="email" placeholder="Email"></div>
+	                <div><input id="email" name="email" class="form-control required" type="email" placeholder="E-mail"></div>
 	            </div>
 	           <div class="group">
 	                <label for="name">Mot de passe</label>
-	                <div><input id="password" name="password" class="form-control required" type="password" placeholder="Passwor"></div>
+	                <div><input id="password" name="password" class="form-control required" type="password" placeholder="Mot de Passe"></div>
 	            </div>
 	            <?php if($error) { ?>
 	                <em>
@@ -94,7 +94,7 @@ $_SESSION['userName'] = 'Root';		$_COOKIE['varname'] = 9;	?>
 				<?php } ?>
 	            <div class="group submit">
 	                <label class="empty"></label>
-	                <div><input name="submit" type="submit" value="Envoyer"/></div>
+	                <div><input name="submit" type="submit" value="Se Connecter"/></div>
 	            </div>
 	        </div>
 	        <div id="form-loading" class="hide"><i class="fa fa-circle-o-notch fa-spin"></i></div>

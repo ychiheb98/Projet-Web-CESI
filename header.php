@@ -19,7 +19,6 @@
   <!-- Navbar content -->
 
 <A class="navbar-brand" HREF="index.php" style="padding-left:25px">Accueil</A>&nbsp&nbsp&nbsp
-<A class="navbar-brand" HREF="help.php">Aide</A>&nbsp&nbsp&nbsp
 <?php  
 session_start();
 include("config.php");
