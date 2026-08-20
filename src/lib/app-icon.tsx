@@ -10,14 +10,14 @@ export function renderAppIcon(size: number) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #4f46e5, #818cf8)",
+          background: "linear-gradient(135deg, #0a0d0c, #14231c)",
         }}
       >
         <span
           style={{
             fontSize: size * 0.56,
             fontWeight: 700,
-            color: "#ffffff",
+            color: "#34d399",
             fontFamily: "sans-serif",
           }}
         >

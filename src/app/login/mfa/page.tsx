@@ -3,6 +3,9 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 
 export default function MfaChallengePage() {
   const router = useRouter();
@@ -49,29 +52,26 @@ export default function MfaChallengePage() {
   return (
     <main className="flex-1 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
-        <h1 className="text-2xl font-semibold text-foreground text-center">Enter your code</h1>
+        <h1 className="text-2xl font-bold text-foreground text-center">Enter your code</h1>
         <p className="text-muted text-sm text-center mt-1">Open your authenticator app for the 6-digit code.</p>
 
         <form onSubmit={onSubmit} className="mt-8 space-y-4">
-          <input
+          <Input
             inputMode="numeric"
             maxLength={6}
             required
             autoFocus
             value={code}
             onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-            className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-center text-2xl tracking-[0.4em] text-foreground outline-none focus:ring-2 focus:ring-primary"
+            className="text-center text-2xl tracking-[0.4em]"
+            aria-label="6-digit code"
           />
 
-          {error && <p className="text-sm text-danger">{error}</p>}
+          {error && <Alert variant="danger">{error}</Alert>}
 
-          <button
-            type="submit"
-            disabled={loading || code.length !== 6}
-            className="w-full rounded-lg bg-primary text-primary-foreground font-medium py-2.5 disabled:opacity-60"
-          >
+          <Button type="submit" disabled={loading || code.length !== 6} size="lg" className="w-full">
             {loading ? "Verifying…" : "Verify"}
-          </button>
+          </Button>
         </form>
       </div>
     </main>

@@ -12,7 +12,7 @@ export default async function NewExpensePage() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold text-foreground mb-4">Add expense</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-foreground mb-4">Add expense</h1>
       <ExpenseForm categories={categories ?? []} />
     </div>
   );

@@ -2,8 +2,13 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { X } from "lucide-react";
 import { upsertBudget, createRecurringBill, deleteRecurringBill } from "@/lib/actions/budgets";
 import { formatCurrency } from "@/lib/budget-engine";
+import { Card, CardTitle } from "@/components/ui/Card";
+import { Input, Label } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 import type { Category, Budget, RecurringBill } from "@/lib/types";
 
 export function BudgetsClient({
@@ -51,49 +56,48 @@ export function BudgetsClient({
 
   return (
     <div className="space-y-4">
-      <form onSubmit={saveBudgets} className="rounded-xl border border-border bg-surface p-4 space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-foreground mb-1" htmlFor="overall">
-            Overall monthly budget
-          </label>
-          <input
-            id="overall"
-            type="number"
-            inputMode="decimal"
-            step="0.01"
-            min="0"
-            value={overallAmount}
-            onChange={(e) => setOverallAmount(e.target.value)}
-            className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-foreground outline-none focus:ring-2 focus:ring-primary"
-          />
-          <p className="text-xs text-muted mt-1">This drives your daily safe-to-spend number.</p>
-        </div>
+      <Card>
+        <form onSubmit={saveBudgets} className="space-y-4">
+          <div>
+            <Label htmlFor="overall">Overall monthly budget</Label>
+            <Input
+              id="overall"
+              type="number"
+              inputMode="decimal"
+              step="0.01"
+              min="0"
+              value={overallAmount}
+              onChange={(e) => setOverallAmount(e.target.value)}
+            />
+            <p className="text-xs text-muted mt-1.5">This drives your daily safe-to-spend number.</p>
+          </div>
 
-        <div className="space-y-2">
-          <p className="text-sm font-medium text-foreground">Per-category budgets (optional)</p>
-          {categories.map((c) => (
-            <div key={c.id} className="flex items-center gap-3">
-              <span className="text-sm text-foreground flex-1">{c.name}</span>
-              <input
-                type="number"
-                inputMode="decimal"
-                step="0.01"
-                min="0"
-                placeholder="—"
-                value={categoryAmounts[c.id]}
-                onChange={(e) => setCategoryAmounts((prev) => ({ ...prev, [c.id]: e.target.value }))}
-                className="w-28 rounded-lg border border-border bg-surface px-2 py-1.5 text-sm text-foreground text-right outline-none focus:ring-2 focus:ring-primary"
-              />
-            </div>
-          ))}
-        </div>
+          <div className="space-y-2">
+            <p className="text-xs font-medium uppercase tracking-wide text-muted">Per-category budgets (optional)</p>
+            {categories.map((c) => (
+              <div key={c.id} className="flex items-center gap-3">
+                <span className="text-sm text-foreground flex-1">{c.name}</span>
+                <Input
+                  type="number"
+                  inputMode="decimal"
+                  step="0.01"
+                  min="0"
+                  placeholder="—"
+                  value={categoryAmounts[c.id]}
+                  onChange={(e) => setCategoryAmounts((prev) => ({ ...prev, [c.id]: e.target.value }))}
+                  className="w-28 py-1.5 text-right"
+                />
+              </div>
+            ))}
+          </div>
 
-        {error && <p className="text-sm text-danger">{error}</p>}
+          {error && <Alert variant="danger">{error}</Alert>}
 
-        <button type="submit" disabled={saving} className="w-full rounded-lg bg-primary text-primary-foreground font-medium py-2.5 disabled:opacity-60">
-          {saving ? "Saving…" : "Save budgets"}
-        </button>
-      </form>
+          <Button type="submit" disabled={saving} size="lg" className="w-full">
+            {saving ? "Saving…" : "Save budgets"}
+          </Button>
+        </form>
+      </Card>
 
       <RecurringBills bills={bills} currency={currency} />
     </div>
@@ -125,11 +129,11 @@ function RecurringBills({ bills, currency }: { bills: RecurringBill[]; currency:
   }
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-4 space-y-3">
-      <p className="font-medium text-foreground">Recurring bills</p>
-      <p className="text-xs text-muted -mt-2">
-        Reserved out of your daily allowance until each bill&rsquo;s due day passes.
-      </p>
+    <Card className="space-y-3">
+      <div>
+        <CardTitle>Recurring bills</CardTitle>
+        <p className="text-xs text-muted mt-0.5">Reserved out of your daily allowance until each bill&rsquo;s due day passes.</p>
+      </div>
 
       {bills.length > 0 && (
         <ul className="divide-y divide-border">
@@ -143,9 +147,10 @@ function RecurringBills({ bills, currency }: { bills: RecurringBill[]; currency:
                     await deleteRecurringBill(bill.id);
                     router.refresh();
                   }}
-                  className="text-xs text-danger"
+                  className="text-muted"
+                  aria-label={`Remove ${bill.name}`}
                 >
-                  Remove
+                  <X className="h-4 w-4" />
                 </button>
               </div>
             </li>
@@ -155,22 +160,20 @@ function RecurringBills({ bills, currency }: { bills: RecurringBill[]; currency:
 
       <form onSubmit={onAdd} className="flex items-end gap-2">
         <div className="flex-1">
-          <label className="block text-xs text-muted mb-1">Name</label>
-          <input value={name} onChange={(e) => setName(e.target.value)} required className="w-full rounded-lg border border-border bg-surface px-2 py-1.5 text-sm text-foreground" />
+          <Label htmlFor="bill-name">Name</Label>
+          <Input id="bill-name" value={name} onChange={(e) => setName(e.target.value)} required className="py-1.5" />
         </div>
         <div className="w-24">
-          <label className="block text-xs text-muted mb-1">Amount</label>
-          <input type="number" step="0.01" min="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} required className="w-full rounded-lg border border-border bg-surface px-2 py-1.5 text-sm text-foreground" />
+          <Label htmlFor="bill-amount">Amount</Label>
+          <Input id="bill-amount" type="number" step="0.01" min="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} required className="py-1.5" />
         </div>
         <div className="w-16">
-          <label className="block text-xs text-muted mb-1">Day</label>
-          <input type="number" min="1" max="28" value={dueDay} onChange={(e) => setDueDay(e.target.value)} required className="w-full rounded-lg border border-border bg-surface px-2 py-1.5 text-sm text-foreground" />
+          <Label htmlFor="bill-day">Day</Label>
+          <Input id="bill-day" type="number" min="1" max="28" value={dueDay} onChange={(e) => setDueDay(e.target.value)} required className="py-1.5" />
         </div>
-        <button type="submit" disabled={saving} className="rounded-lg bg-primary text-primary-foreground text-sm font-medium px-3 py-1.5 disabled:opacity-60">
-          Add
-        </button>
+        <Button type="submit" disabled={saving} size="sm">Add</Button>
       </form>
-      {error && <p className="text-sm text-danger">{error}</p>}
-    </div>
+      {error && <Alert variant="danger">{error}</Alert>}
+    </Card>
   );
 }

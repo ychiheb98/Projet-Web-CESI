@@ -16,7 +16,7 @@ export default async function EditExpensePage({ params }: { params: Promise<{ id
 
   return (
     <div>
-      <h1 className="text-xl font-semibold text-foreground mb-4">Edit expense</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-foreground mb-4">Edit expense</h1>
       <ExpenseForm categories={categories ?? []} expense={expense} />
     </div>
   );

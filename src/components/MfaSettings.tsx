@@ -2,6 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { Card, CardTitle } from "@/components/ui/Card";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { Badge } from "@/components/ui/Badge";
 
 type Factor = { id: string; friendly_name?: string; factor_type: string; status: string };
 
@@ -88,57 +93,51 @@ export function MfaSettings() {
   const verifiedFactor = factors?.find((f) => f.status === "verified");
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-4 space-y-3">
-      <p className="font-medium text-foreground">Two-factor authentication</p>
+    <Card className="space-y-3">
+      <CardTitle>Two-factor authentication</CardTitle>
       <p className="text-xs text-muted -mt-2">
         Adds a 6-digit code from an authenticator app on top of your password. Strongly recommended since this app holds your real spending data.
       </p>
 
       {verifiedFactor ? (
-        <div className="flex items-center justify-between text-sm">
-          <span className="text-success font-medium">Enabled</span>
-          <button onClick={() => unenroll(verifiedFactor.id)} disabled={busy} className="text-danger text-sm disabled:opacity-60">
+        <div className="flex items-center justify-between">
+          <Badge variant="primary">Enabled</Badge>
+          <Button variant="ghost" size="sm" className="text-danger" onClick={() => unenroll(verifiedFactor.id)} disabled={busy}>
             Turn off
-          </button>
+          </Button>
         </div>
       ) : enrolling && qrCode ? (
         <div className="space-y-3">
           <p className="text-sm text-foreground">Scan this in your authenticator app (Google Authenticator, 1Password, Authy…):</p>
-          <div className="flex justify-center bg-white rounded-lg p-3">
+          <div className="flex justify-center bg-white rounded-xl p-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={`data:image/svg+xml;utf-8,${encodeURIComponent(qrCode)}`} alt="TOTP QR code" width={180} height={180} />
           </div>
           {secret && (
             <p className="text-xs text-muted text-center break-all">Can&rsquo;t scan? Enter this key manually: {secret}</p>
           )}
-          <div>
-            <label className="block text-xs text-muted mb-1">6-digit code</label>
-            <input
-              inputMode="numeric"
-              maxLength={6}
-              value={code}
-              onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground tracking-widest text-center"
-            />
-          </div>
+          <Input
+            inputMode="numeric"
+            maxLength={6}
+            value={code}
+            onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+            className="tracking-widest text-center"
+            aria-label="6-digit code"
+          />
           <div className="flex gap-2">
-            <button
-              onClick={confirmEnroll}
-              disabled={busy || code.length !== 6}
-              className="flex-1 rounded-lg bg-primary text-primary-foreground text-sm font-medium py-2 disabled:opacity-60"
-            >
+            <Button onClick={confirmEnroll} disabled={busy || code.length !== 6} size="sm" className="flex-1">
               {busy ? "Verifying…" : "Confirm"}
-            </button>
-            <button onClick={cancelEnroll} className="text-sm text-muted px-3">Cancel</button>
+            </Button>
+            <Button variant="ghost" size="sm" onClick={cancelEnroll}>Cancel</Button>
           </div>
         </div>
       ) : (
-        <button onClick={startEnroll} disabled={busy} className="rounded-lg bg-primary text-primary-foreground text-sm font-medium px-4 py-2 disabled:opacity-60">
+        <Button onClick={startEnroll} disabled={busy} size="sm">
           {busy ? "Starting…" : "Set up two-factor authentication"}
-        </button>
+        </Button>
       )}
 
-      {error && <p className="text-sm text-danger">{error}</p>}
-    </div>
+      {error && <Alert variant="danger">{error}</Alert>}
+    </Card>
   );
 }

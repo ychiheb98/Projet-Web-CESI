@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { Sparkles } from "lucide-react";
 import { getAiInsight } from "@/lib/ai/insights";
+import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 
 export function AiInsightPanel() {
   const [message, setMessage] = useState<string | null>(null);
@@ -18,20 +22,19 @@ export function AiInsightPanel() {
   }
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-4">
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="font-medium text-foreground">AI coach</h2>
-        <button
-          onClick={onClick}
-          disabled={loading}
-          className="text-sm rounded-full bg-primary/10 text-primary px-3 py-1.5 font-medium disabled:opacity-60"
-        >
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-1.5">
+          <Sparkles className="h-4 w-4 text-primary" />
+          AI coach
+        </CardTitle>
+        <Button onClick={onClick} disabled={loading} variant="secondary" size="sm">
           {loading ? "Thinking…" : message ? "Refresh" : "Get insight"}
-        </button>
-      </div>
-      {message && <p className="text-sm text-foreground mt-3 leading-relaxed">{message}</p>}
-      {error && <p className="text-sm text-danger mt-3">{error}</p>}
-      {!message && !error && <p className="text-sm text-muted mt-3">Get a plain-language read on how this month is going.</p>}
-    </div>
+        </Button>
+      </CardHeader>
+      {message && <p className="text-sm text-foreground leading-relaxed">{message}</p>}
+      {error && <Alert variant="danger">{error}</Alert>}
+      {!message && !error && <p className="text-sm text-muted">Get a plain-language read on how this month is going.</p>}
+    </Card>
   );
 }

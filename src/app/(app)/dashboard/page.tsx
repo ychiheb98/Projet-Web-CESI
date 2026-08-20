@@ -4,11 +4,14 @@ import { getUserBudgetSnapshot } from "@/lib/dashboard-data";
 import { formatCurrency, paceMessage } from "@/lib/budget-engine";
 import { ProgressBar } from "@/components/ProgressBar";
 import { AiInsightPanel } from "@/components/AiInsightPanel";
+import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 
-const PACE_COLOR: Record<string, string> = {
-  ahead: "text-success",
-  on_track: "text-primary",
-  behind: "text-danger",
+const PACE_BADGE: Record<string, { label: string; variant: "primary" | "info" | "danger" }> = {
+  ahead: { label: "Ahead of plan", variant: "primary" },
+  on_track: { label: "On track", variant: "info" },
+  behind: { label: "Overspending", variant: "danger" },
 };
 
 export default async function DashboardPage() {
@@ -25,31 +28,33 @@ export default async function DashboardPage() {
 
   if (snapshot.overallBudget === 0) {
     return (
-      <div className="rounded-xl border border-border bg-surface p-6 text-center">
-        <p className="text-foreground font-medium">Set a monthly budget to get started</p>
+      <Card className="text-center py-8">
+        <p className="text-foreground font-semibold">Set a monthly budget to get started</p>
         <p className="text-sm text-muted mt-1">Once you set an overall monthly budget, we&rsquo;ll tell you exactly how much you can spend per day.</p>
-        <Link href="/budgets" className="inline-block mt-4 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium">
-          Set your budget
-        </Link>
-      </div>
+        <Button asChild className="mt-4">
+          <Link href="/budgets">Set your budget</Link>
+        </Button>
+      </Card>
     );
   }
 
+  const pace = PACE_BADGE[allowance.paceStatus];
+
   return (
     <div className="space-y-4">
-      <section className="rounded-2xl bg-primary text-primary-foreground p-6">
-        <p className="text-sm opacity-80">Safe to spend today</p>
-        <p className="text-4xl font-semibold mt-1">{formatCurrency(allowance.dailyAllowance, currency)}</p>
-        <p className="text-sm opacity-80 mt-2">{allowance.daysLeftIncludingToday} days left this month</p>
+      <section className="rounded-2xl bg-gradient-to-br from-primary/25 via-surface to-surface border border-primary/20 p-6">
+        <p className="text-sm text-muted">Safe to spend today</p>
+        <p className="text-5xl font-extrabold tracking-tight text-foreground mt-1">
+          {formatCurrency(allowance.dailyAllowance, currency)}
+        </p>
+        <p className="text-sm text-muted mt-2">{allowance.daysLeftIncludingToday} days left this month</p>
       </section>
 
-      <section className="rounded-xl border border-border bg-surface p-4">
-        <div className="flex items-center justify-between">
-          <p className="font-medium text-foreground">This month</p>
-          <p className={`text-sm font-medium ${PACE_COLOR[allowance.paceStatus]}`}>
-            {allowance.paceStatus === "behind" ? "Overspending" : allowance.paceStatus === "ahead" ? "Ahead of plan" : "On track"}
-          </p>
-        </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>This month</CardTitle>
+          <Badge variant={pace.variant}>{pace.label}</Badge>
+        </CardHeader>
         <ProgressBar
           value={snapshot.spentThisMonth / snapshot.overallBudget}
           colorClass={allowance.paceStatus === "behind" ? "bg-danger" : "bg-primary"}
@@ -64,11 +69,11 @@ export default async function DashboardPage() {
             {formatCurrency(allowance.reserved, currency)} reserved for upcoming bills and goal savings.
           </p>
         )}
-      </section>
+      </Card>
 
       {snapshot.goals.length > 0 && (
-        <section className="rounded-xl border border-border bg-surface p-4">
-          <p className="font-medium text-foreground mb-3">Goals</p>
+        <Card>
+          <CardTitle className="mb-3">Goals</CardTitle>
           <div className="space-y-3">
             {snapshot.goals.slice(0, 3).map((goal) => (
               <div key={goal.id}>
@@ -79,18 +84,18 @@ export default async function DashboardPage() {
                   </span>
                 </div>
                 <div className="mt-1">
-                  <ProgressBar value={goal.saved_amount / goal.target_amount} colorClass="bg-success" />
+                  <ProgressBar value={goal.saved_amount / goal.target_amount} colorClass="bg-primary" />
                 </div>
               </div>
             ))}
           </div>
           <Link href="/goals" className="text-sm text-primary font-medium mt-3 inline-block">View all goals</Link>
-        </section>
+        </Card>
       )}
 
       {snapshot.categoryBudgets.length > 0 && (
-        <section className="rounded-xl border border-border bg-surface p-4">
-          <p className="font-medium text-foreground mb-3">Spending by category</p>
+        <Card>
+          <CardTitle className="mb-3">Spending by category</CardTitle>
           <div className="space-y-3">
             {snapshot.categoryBudgets.map((budget) => {
               const category = snapshot.categories.find((c) => c.id === budget.category_id);
@@ -111,16 +116,16 @@ export default async function DashboardPage() {
               );
             })}
           </div>
-        </section>
+        </Card>
       )}
 
       <AiInsightPanel />
 
-      <section className="rounded-xl border border-border bg-surface p-4">
-        <div className="flex items-center justify-between mb-3">
-          <p className="font-medium text-foreground">Recent expenses</p>
+      <Card>
+        <CardHeader>
+          <CardTitle>Recent expenses</CardTitle>
           <Link href="/expenses" className="text-sm text-primary font-medium">See all</Link>
-        </div>
+        </CardHeader>
         {snapshot.recentExpenses.length === 0 ? (
           <p className="text-sm text-muted">No expenses logged yet.</p>
         ) : (
@@ -139,7 +144,7 @@ export default async function DashboardPage() {
             })}
           </ul>
         )}
-      </section>
+      </Card>
     </div>
   );
 }

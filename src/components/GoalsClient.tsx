@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { createGoal, archiveGoal, contributeToGoal } from "@/lib/actions/goals";
 import { formatCurrency } from "@/lib/budget-engine";
 import { ProgressBar } from "@/components/ProgressBar";
+import { Card } from "@/components/ui/Card";
+import { Input, Label } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 import type { Goal } from "@/lib/types";
 
 function todayLocal(): string {
@@ -48,35 +52,38 @@ function GoalCard({ goal, currency }: { goal: Goal; currency: string }) {
   }
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-4">
+    <Card>
       <div className="flex items-start justify-between">
         <div>
-          <p className="font-medium text-foreground">{goal.name}</p>
+          <p className="font-semibold text-foreground">{goal.name}</p>
           <p className="text-sm text-muted">
             {formatCurrency(goal.saved_amount, currency)} of {formatCurrency(goal.target_amount, currency)}
             {goal.target_date ? ` · by ${goal.target_date}` : ""}
           </p>
         </div>
-        <button
+        <Button
+          variant="ghost"
+          size="sm"
+          className="px-2 text-muted"
           onClick={async () => {
             await archiveGoal(goal.id);
             router.refresh();
           }}
-          className="text-xs text-muted"
         >
           Archive
-        </button>
+        </Button>
       </div>
 
       <div className="mt-3">
-        <ProgressBar value={pct} colorClass={pct >= 1 ? "bg-success" : "bg-primary"} />
+        <ProgressBar value={pct} colorClass="bg-primary" />
       </div>
 
       {contributing ? (
         <form onSubmit={onContribute} className="mt-3 flex items-end gap-2">
           <div className="flex-1">
-            <label className="block text-xs text-muted mb-1">Add contribution</label>
-            <input
+            <Label htmlFor={`contribute-${goal.id}`}>Add contribution</Label>
+            <Input
+              id={`contribute-${goal.id}`}
               type="number"
               step="0.01"
               min="0.01"
@@ -84,23 +91,19 @@ function GoalCard({ goal, currency }: { goal: Goal; currency: string }) {
               autoFocus
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="w-full rounded-lg border border-border bg-surface px-2 py-1.5 text-sm text-foreground"
+              className="py-1.5"
             />
           </div>
-          <button type="submit" disabled={saving} className="rounded-lg bg-primary text-primary-foreground text-sm font-medium px-3 py-1.5 disabled:opacity-60">
-            {saving ? "Saving…" : "Save"}
-          </button>
-          <button type="button" onClick={() => setContributing(false)} className="text-sm text-muted px-2">
-            Cancel
-          </button>
+          <Button type="submit" disabled={saving} size="sm">{saving ? "Saving…" : "Save"}</Button>
+          <Button type="button" variant="ghost" size="sm" onClick={() => setContributing(false)}>Cancel</Button>
         </form>
       ) : (
-        <button onClick={() => setContributing(true)} className="mt-3 text-sm text-primary font-medium">
+        <Button variant="link" className="mt-3" onClick={() => setContributing(true)}>
           + Add contribution
-        </button>
+        </Button>
       )}
-      {error && <p className="text-sm text-danger mt-2">{error}</p>}
-    </div>
+      {error && <Alert variant="danger" className="mt-2">{error}</Alert>}
+    </Card>
   );
 }
 
@@ -115,7 +118,10 @@ function NewGoalForm() {
 
   if (!open) {
     return (
-      <button onClick={() => setOpen(true)} className="w-full rounded-xl border border-dashed border-border py-3 text-sm text-primary font-medium">
+      <button
+        onClick={() => setOpen(true)}
+        className="w-full rounded-2xl border border-dashed border-border py-3.5 text-sm text-primary font-medium hover:bg-surface-inset transition-colors"
+      >
         + New goal
       </button>
     );
@@ -139,28 +145,28 @@ function NewGoalForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-xl border border-border bg-surface p-4 space-y-3">
-      <div>
-        <label className="block text-xs text-muted mb-1">Goal name</label>
-        <input required value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground" />
-      </div>
-      <div>
-        <label className="block text-xs text-muted mb-1">Target amount</label>
-        <input type="number" step="0.01" min="0.01" required value={targetAmount} onChange={(e) => setTargetAmount(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground" />
-      </div>
-      <div>
-        <label className="block text-xs text-muted mb-1">Target date (optional)</label>
-        <input type="date" value={targetDate} onChange={(e) => setTargetDate(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground" />
-      </div>
-      {error && <p className="text-sm text-danger">{error}</p>}
-      <div className="flex gap-2">
-        <button type="submit" disabled={saving} className="flex-1 rounded-lg bg-primary text-primary-foreground text-sm font-medium py-2 disabled:opacity-60">
-          {saving ? "Saving…" : "Create goal"}
-        </button>
-        <button type="button" onClick={() => setOpen(false)} className="text-sm text-muted px-3">
-          Cancel
-        </button>
-      </div>
-    </form>
+    <Card>
+      <form onSubmit={onSubmit} className="space-y-3">
+        <div>
+          <Label htmlFor="goal-name">Goal name</Label>
+          <Input id="goal-name" required value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div>
+          <Label htmlFor="goal-target">Target amount</Label>
+          <Input id="goal-target" type="number" step="0.01" min="0.01" required value={targetAmount} onChange={(e) => setTargetAmount(e.target.value)} />
+        </div>
+        <div>
+          <Label htmlFor="goal-date">Target date (optional)</Label>
+          <Input id="goal-date" type="date" value={targetDate} onChange={(e) => setTargetDate(e.target.value)} />
+        </div>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <div className="flex gap-2">
+          <Button type="submit" disabled={saving} className="flex-1">
+            {saving ? "Saving…" : "Create goal"}
+          </Button>
+          <Button type="button" variant="ghost" onClick={() => setOpen(false)}>Cancel</Button>
+        </div>
+      </form>
+    </Card>
   );
 }

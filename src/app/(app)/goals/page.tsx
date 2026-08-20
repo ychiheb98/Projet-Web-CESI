@@ -11,7 +11,7 @@ export default async function GoalsPage() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold text-foreground mb-4">Goals</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-foreground mb-4">Goals</h1>
       <GoalsClient goals={goals ?? []} currency={profile?.currency ?? "USD"} />
     </div>
   );

@@ -3,6 +3,9 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { createExpense, updateExpense } from "@/lib/actions/expenses";
+import { Input, Select, Label } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 import type { Category, Expense } from "@/lib/types";
 
 function todayLocal(): string {
@@ -37,8 +40,8 @@ export function ExpenseForm({ categories, expense }: { categories: Category[]; e
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1" htmlFor="amount">Amount</label>
-        <input
+        <Label htmlFor="amount">Amount</Label>
+        <Input
           id="amount"
           type="number"
           inputMode="decimal"
@@ -48,57 +51,33 @@ export function ExpenseForm({ categories, expense }: { categories: Category[]; e
           autoFocus
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-foreground outline-none focus:ring-2 focus:ring-primary"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1" htmlFor="category">Category</label>
-        <select
-          id="category"
-          value={categoryId}
-          onChange={(e) => setCategoryId(e.target.value)}
-          className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-foreground outline-none focus:ring-2 focus:ring-primary"
-        >
+        <Label htmlFor="category">Category</Label>
+        <Select id="category" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
           {categories.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
           ))}
-        </select>
+        </Select>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1" htmlFor="date">Date</label>
-        <input
-          id="date"
-          type="date"
-          required
-          value={occurredOn}
-          onChange={(e) => setOccurredOn(e.target.value)}
-          className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-foreground outline-none focus:ring-2 focus:ring-primary"
-        />
+        <Label htmlFor="date">Date</Label>
+        <Input id="date" type="date" required value={occurredOn} onChange={(e) => setOccurredOn(e.target.value)} />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1" htmlFor="note">Note (optional)</label>
-        <input
-          id="note"
-          type="text"
-          maxLength={280}
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-foreground outline-none focus:ring-2 focus:ring-primary"
-        />
+        <Label htmlFor="note">Note (optional)</Label>
+        <Input id="note" type="text" maxLength={280} value={note} onChange={(e) => setNote(e.target.value)} />
       </div>
 
-      {error && <p className="text-sm text-danger">{error}</p>}
+      {error && <Alert variant="danger">{error}</Alert>}
 
-      <button
-        type="submit"
-        disabled={saving}
-        className="w-full rounded-lg bg-primary text-primary-foreground font-medium py-2.5 disabled:opacity-60"
-      >
+      <Button type="submit" disabled={saving} size="lg" className="w-full">
         {saving ? "Saving…" : expense ? "Save changes" : "Add expense"}
-      </button>
+      </Button>
     </form>
   );
 }
