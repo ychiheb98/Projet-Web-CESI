@@ -9,6 +9,8 @@ A personal spending tracker built to answer one question every day: **how much c
 - Optional AI coach that narrates your numbers in plain language (the numbers themselves are always the deterministic calculation, never AI-guessed)
 - Installable as a PWA — add it to your phone's home screen, no app store needed
 
+See [`DEVLOG.md`](./DEVLOG.md) for what's been built, why, and what's next — worth reading before picking this project back up in a new session.
+
 ## Stack
 
 - **Next.js 16** (App Router, TypeScript, Tailwind) — deployed on **Vercel** (free tier)
