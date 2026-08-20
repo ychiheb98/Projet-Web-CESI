@@ -10,7 +10,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     <div className="flex-1 flex flex-col min-h-screen">
       <header className="sticky top-0 z-10 border-b border-border bg-background/90 backdrop-blur pt-[env(safe-area-inset-top)]">
         <div className="mx-auto max-w-lg px-4 h-14 flex items-center justify-between">
-          <span className="font-extrabold tracking-tight text-foreground">Budget</span>
+          <span className="font-extrabold tracking-tight text-foreground">Solde</span>
           <form action={signOut}>
             <Button type="submit" variant="ghost" size="sm" className="px-2">Sign out</Button>
           </form>

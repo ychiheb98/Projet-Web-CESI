@@ -44,7 +44,7 @@ export default function SignupPage() {
     <main className="flex-1 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
         <p className="text-4xl font-extrabold tracking-tight text-foreground text-center">
-          Budget<span className="text-primary">.</span>
+          Solde<span className="text-primary">.</span>
         </p>
         <p className="text-muted text-sm text-center mt-2">Your spending data stays private to you.</p>
 

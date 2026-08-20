@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
 
   const admin = createAdminClient();
   const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-  const fromAddress = process.env.ALERT_FROM_EMAIL ?? "Budget <onboarding@resend.dev>";
+  const fromAddress = process.env.ALERT_FROM_EMAIL ?? "Solde <onboarding@resend.dev>";
 
   const { data: allSettings } = await admin
     .from("alert_settings")

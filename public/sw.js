@@ -1,4 +1,4 @@
-const CACHE_NAME = "budget-app-shell-v1";
+const CACHE_NAME = "solde-shell-v1";
 const APP_SHELL = ["/dashboard", "/manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {

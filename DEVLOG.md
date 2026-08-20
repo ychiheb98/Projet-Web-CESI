@@ -13,9 +13,15 @@ just a snapshot.
 
 ## Current Status (as of 2026-08-20)
 
-**Live on `master`:** a working single-user budget PWA — Next.js 16 +
-Supabase + Resend + optional Claude coaching, described in full in
-`README.md`. Merged via PR #2 and PR #3 (see log below).
+**Live on `master`:** a working single-user budget PWA, named **Solde** —
+Next.js 16 + Supabase + Resend + optional Claude coaching, described in
+full in `README.md`. Merged via PR #2 and PR #3 (see log below).
+
+**Repo name:** GitHub still shows this repo as `Projet-Web-CESI` (the old
+school-project name). Renaming the repo itself isn't something the
+available GitHub tooling can do from inside a session — it needs the repo
+owner to do it once in GitHub Settings → General → Repository name. GitHub
+auto-redirects the old URL afterward, so nothing breaks in the meantime.
 
 **Not started yet:**
 - **Pockets/vaults feature** — Revolut-style split: a "main pocket" you can
@@ -60,6 +66,24 @@ matter):
 ---
 
 ## Log
+
+### 2026-08-20 — Renamed the app to Solde
+
+**What:** Replaced the placeholder "Budget" name with **Solde** (French for
+"balance") across everything user-facing: PWA name/short name, page
+titles, the wordmark on login/signup, the header in the app shell, the
+TOTP issuer name shown in authenticator apps, the alert-email sender name,
+`package.json`, and the service-worker cache key. Domain terminology that
+happens to contain the word "budget" — the `budgets` feature/table,
+`Budget` the TypeScript type, `budget-engine.ts` — was deliberately left
+alone; that's describing the feature (a budget), not the product's brand
+name, and renaming it would be pure churn with no user-facing effect.
+
+**Not done:** the GitHub repository itself is still named
+`Projet-Web-CESI`. No tool available in this environment can rename a
+GitHub repo (the MCP GitHub server doesn't expose a repo-settings/rename
+call, and there's no `gh` CLI or raw API access here) — that one's on the
+repo owner, one field in GitHub Settings → General.
 
 ### 2026-08-20 — Modular design system + dark retheme (PR #3, merged)
 

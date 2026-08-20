@@ -1,4 +1,4 @@
-# Budget
+# Solde
 
 A personal spending tracker built to answer one question every day: **how much can I actually spend today and stay on track?**
 

@@ -35,7 +35,7 @@ export function MfaSettings() {
   async function startEnroll() {
     setError(null);
     setBusy(true);
-    const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", issuer: "Budget" });
+    const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", issuer: "Solde" });
     setBusy(false);
     if (error) {
       setError(error.message);
