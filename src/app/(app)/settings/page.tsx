@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { ProfileForm } from "@/components/ProfileForm";
 import { AlertSettingsForm } from "@/components/AlertSettingsForm";
 import { CategoriesManager } from "@/components/CategoriesManager";
+import { MfaSettings } from "@/components/MfaSettings";
 
 export default async function SettingsPage() {
   const supabase = await createClient();
@@ -18,6 +19,7 @@ export default async function SettingsPage() {
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-semibold text-foreground">Settings</h1>
+      <MfaSettings />
       <ProfileForm profile={profile} />
       <AlertSettingsForm settings={alertSettings} />
       <CategoriesManager categories={categories ?? []} />

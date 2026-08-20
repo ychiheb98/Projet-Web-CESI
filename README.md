@@ -21,12 +21,26 @@ Total cost to run this yourself: **$0/month** on the free tiers above, until you
 
 ## Security notes
 
+This app is built for one person to hold real spending data in, so security isn't an afterthought:
+
+- **Single-user by design.** Signup locks itself shut after the first account is created (checked server-side) — there's no way for a second account to be created through the app once yours exists.
+- **Two-factor authentication (TOTP)** is built in — set it up under Settings once you're signed in. It's enforced at the routing layer, not just offered: a session that has a verified authenticator but hasn't used it yet is redirected to the code challenge before it can reach any page, so a leaked password alone isn't enough to get in.
 - Every table is scoped with Postgres **row-level security** — a user can only ever read or write their own rows, enforced by the database itself, not just application code.
 - The Supabase **service-role key** (which bypasses RLS) is only ever used server-side, in the one cron route that has to look across users to decide who gets an alert email. It's never sent to the browser.
+- Strict **security headers** on every response — Content-Security-Policy (no inline/eval scripts), HSTS, X-Frame-Options, Referrer-Policy, and a locked-down Permissions-Policy. See `next.config.ts`.
 - CSV import parses the file in your browser and only sends structured rows (amount/date/note/category) to the server — the file itself is never uploaded or executed.
 - All inputs are validated server-side with `zod` before touching the database, even though Server Actions also flow through the browser.
 - The `/api/cron/daily-check` route requires a `CRON_SECRET` bearer token — nothing else can trigger it.
 - AI insight requests send aggregated numbers and category names only — never your raw expense notes — to Anthropic.
+
+### Recommended: harden Supabase Auth itself
+
+A few settings live in the Supabase dashboard rather than in this codebase — worth turning on for a finance app:
+
+- **Authentication → Settings → Password Protection**: enable "leaked password protection" (checks new passwords against HaveIBeenPwned) and set a minimum password length of at least 12.
+- **Authentication → Settings → Confirm email**: leave this **on**. It doesn't add friction (you'll only ever sign up once) and it stops the one signup slot from being claimed by a mistyped or unowned email address.
+- **Authentication → Rate Limits**: Supabase applies sane defaults out of the box; you can tighten them further here if you want.
+- Rotate the `service_role` key (Project Settings → API) if you ever suspect it leaked — it's the one credential in this app that bypasses every access control.
 
 ## Setup
 
@@ -34,7 +48,7 @@ Total cost to run this yourself: **$0/month** on the free tiers above, until you
 
 1. Create a free project at [supabase.com](https://supabase.com).
 2. In the SQL editor, run the migration in `supabase/migrations/0001_init.sql`. It creates every table, RLS policy, and a trigger that bootstraps a new signed-up user with default categories.
-3. In **Authentication → Providers**, email/password is enabled by default. If you want to skip email confirmation for a single-user setup, turn off "Confirm email" under Authentication → Settings.
+3. In **Authentication → Providers**, email/password is enabled by default — leave "Confirm email" on under Authentication → Settings (see [Security notes](#security-notes) below for why).
 4. Copy your Project URL, `anon` public key, and `service_role` secret key from **Project Settings → API**.
 
 ### 2. Resend (email alerts)
@@ -58,7 +72,7 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:3000`, sign up, and set a monthly budget under **Budgets**.
+Visit `http://localhost:3000`, sign up (this is your one and only account — signup locks after this), turn on two-factor authentication under **Settings**, and set a monthly budget under **Budgets**.
 
 ### 6. Deploy to Vercel
 
