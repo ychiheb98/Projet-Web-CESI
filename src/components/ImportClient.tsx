@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import { guessColumn, parseAmount, parseDate } from "@/lib/csv";
 import { importExpenses, type ImportRow } from "@/lib/actions/expenses";
+import { Card, CardTitle } from "@/components/ui/Card";
+import { Select, Label } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 
 const NONE = "__none__";
 
@@ -80,21 +84,25 @@ export function ImportClient({ categoryNames }: { categoryNames: string[] }) {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border border-border bg-surface p-4">
-        <label className="block text-sm font-medium text-foreground mb-2" htmlFor="csv-file">
-          Bank or card statement (CSV)
-        </label>
-        <input id="csv-file" type="file" accept=".csv,text/csv" onChange={onFile} className="text-sm text-foreground" />
+      <Card>
+        <Label htmlFor="csv-file">Bank or card statement (CSV)</Label>
+        <input
+          id="csv-file"
+          type="file"
+          accept=".csv,text/csv"
+          onChange={onFile}
+          className="text-sm text-foreground file:mr-3 file:rounded-full file:border-0 file:bg-primary/10 file:px-3 file:py-1.5 file:text-primary file:font-medium"
+        />
         <p className="text-xs text-muted mt-2">
           Nothing is uploaded to a bank — you export the CSV yourself and only the parsed rows below are saved.
         </p>
-      </div>
+      </Card>
 
-      {error && <p className="text-sm text-danger">{error}</p>}
+      {error && <Alert variant="danger">{error}</Alert>}
 
       {headers.length > 0 && (
-        <div className="rounded-xl border border-border bg-surface p-4 space-y-3">
-          <p className="font-medium text-foreground">Map columns</p>
+        <Card className="space-y-3">
+          <CardTitle>Map columns</CardTitle>
           <ColumnSelect label="Amount" headers={headers} value={amountCol} onChange={setAmountCol} />
           <ColumnSelect label="Date" headers={headers} value={dateCol} onChange={setDateCol} />
           <ColumnSelect label="Note" headers={headers} value={noteCol} onChange={setNoteCol} allowNone />
@@ -115,16 +123,12 @@ export function ImportClient({ categoryNames }: { categoryNames: string[] }) {
             <p className="text-xs text-muted">Your categories: {categoryNames.join(", ")}</p>
           )}
 
-          {result && <p className="text-sm text-success">{result}</p>}
+          {result && <Alert variant="success">{result}</Alert>}
 
-          <button
-            onClick={onImport}
-            disabled={importing || mapped.length === 0}
-            className="w-full rounded-lg bg-primary text-primary-foreground font-medium py-2.5 disabled:opacity-60"
-          >
+          <Button onClick={onImport} disabled={importing || mapped.length === 0} size="lg" className="w-full">
             {importing ? "Importing…" : `Import ${mapped.length} expense${mapped.length === 1 ? "" : "s"}`}
-          </button>
-        </div>
+          </Button>
+        </Card>
       )}
     </div>
   );
@@ -145,17 +149,13 @@ function ColumnSelect({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-muted mb-1">{label}</label>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground"
-      >
+      <Label>{label}</Label>
+      <Select value={value} onChange={(e) => onChange(e.target.value)} className="py-2 text-sm">
         {allowNone && <option value={NONE}>None</option>}
         {headers.map((h) => (
           <option key={h} value={h}>{h}</option>
         ))}
-      </select>
+      </Select>
     </div>
   );
 }

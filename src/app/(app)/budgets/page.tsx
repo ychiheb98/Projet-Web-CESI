@@ -17,7 +17,7 @@ export default async function BudgetsPage() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold text-foreground mb-4">Budgets</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-foreground mb-4">Budgets</h1>
       <BudgetsClient
         month={month}
         currency={currency}

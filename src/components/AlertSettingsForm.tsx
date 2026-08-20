@@ -3,6 +3,11 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { updateAlertSettings } from "@/lib/actions/settings";
+import { Card, CardTitle } from "@/components/ui/Card";
+import { Input, Label } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { ToggleRow } from "@/components/ui/ToggleRow";
 import type { AlertSettings } from "@/lib/types";
 
 export function AlertSettingsForm({ settings }: { settings: AlertSettings }) {
@@ -38,39 +43,47 @@ export function AlertSettingsForm({ settings }: { settings: AlertSettings }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-xl border border-border bg-surface p-4 space-y-3">
-      <p className="font-medium text-foreground">Email alerts</p>
-      <div>
-        <label className="block text-xs text-muted mb-1">Alert email</label>
-        <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground" />
-      </div>
+    <Card>
+      <form onSubmit={onSubmit} className="space-y-3">
+        <CardTitle>Email alerts</CardTitle>
+        <div>
+          <Label htmlFor="alert-email">Alert email</Label>
+          <Input id="alert-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
 
-      <label className="flex items-center gap-2 text-sm text-foreground">
-        <input type="checkbox" checked={dailyDigest} onChange={(e) => setDailyDigest(e.target.checked)} />
-        Send me a daily digest with my safe-to-spend amount
-      </label>
+        <ToggleRow
+          accent="info"
+          title="Daily digest"
+          description="A daily email with your safe-to-spend amount."
+          checked={dailyDigest}
+          onCheckedChange={setDailyDigest}
+        />
 
-      <label className="flex items-center gap-2 text-sm text-foreground">
-        <input type="checkbox" checked={overspendAlerts} onChange={(e) => setOverspendAlerts(e.target.checked)} />
-        Warn me when I&rsquo;m overspending or off track on a goal
-      </label>
+        <ToggleRow
+          accent="warning"
+          title="Overspend warnings"
+          description="Warn me when I'm overspending or off track on a goal."
+          checked={overspendAlerts}
+          onCheckedChange={setOverspendAlerts}
+        />
 
-      <div>
-        <label className="block text-xs text-muted mb-1">Overspend threshold (% of planned pace)</label>
-        <input type="number" min="100" max="300" value={threshold} onChange={(e) => setThreshold(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground" />
-        <p className="text-xs text-muted mt-1">e.g. 110 alerts once you&rsquo;re 10% ahead of a straight-line budget pace.</p>
-      </div>
+        <div>
+          <Label htmlFor="threshold">Overspend threshold (% of planned pace)</Label>
+          <Input id="threshold" type="number" min="100" max="300" value={threshold} onChange={(e) => setThreshold(e.target.value)} />
+          <p className="text-xs text-muted mt-1.5">e.g. 110 alerts once you&rsquo;re 10% ahead of a straight-line budget pace.</p>
+        </div>
 
-      <div>
-        <label className="block text-xs text-muted mb-1">Alert if daily allowance drops below</label>
-        <input type="number" min="0" value={lowAllowance} onChange={(e) => setLowAllowance(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground" />
-      </div>
+        <div>
+          <Label htmlFor="low-allowance">Alert if daily allowance drops below</Label>
+          <Input id="low-allowance" type="number" min="0" value={lowAllowance} onChange={(e) => setLowAllowance(e.target.value)} />
+        </div>
 
-      {error && <p className="text-sm text-danger">{error}</p>}
-      {saved && <p className="text-sm text-success">Saved.</p>}
-      <button type="submit" disabled={saving} className="rounded-lg bg-primary text-primary-foreground text-sm font-medium px-4 py-2 disabled:opacity-60">
-        {saving ? "Saving…" : "Save alert settings"}
-      </button>
-    </form>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {saved && <Alert variant="success">Saved.</Alert>}
+        <Button type="submit" disabled={saving} size="sm">
+          {saving ? "Saving…" : "Save alert settings"}
+        </Button>
+      </form>
+    </Card>
   );
 }

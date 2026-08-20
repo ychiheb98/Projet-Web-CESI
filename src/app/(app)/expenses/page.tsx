@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { Pencil } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { formatCurrency } from "@/lib/budget-engine";
 import { DeleteExpenseButton } from "@/components/DeleteExpenseButton";
+import { Card } from "@/components/ui/Card";
 
 export default async function ExpensesPage() {
   const supabase = await createClient();
@@ -26,27 +28,31 @@ export default async function ExpensesPage() {
       {(!expenses || expenses.length === 0) ? (
         <p className="text-sm text-muted">No expenses yet. Tap the + button to add one.</p>
       ) : (
-        <ul className="divide-y divide-border rounded-xl border border-border bg-surface">
-          {expenses.map((expense) => {
-            const category = categoryById.get(expense.category_id ?? "");
-            return (
-              <li key={expense.id} className="px-4 py-3 flex items-center justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="text-sm text-foreground truncate">
-                    {category?.name ?? "Uncategorized"}
-                    {expense.note ? ` · ${expense.note}` : ""}
-                  </p>
-                  <p className="text-xs text-muted">{expense.occurred_on}</p>
-                </div>
-                <div className="flex items-center gap-3 shrink-0">
-                  <p className="text-sm font-medium text-foreground">{formatCurrency(Number(expense.amount), currency)}</p>
-                  <Link href={`/expenses/${expense.id}/edit`} className="text-xs text-primary">Edit</Link>
-                  <DeleteExpenseButton id={expense.id} />
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <Card className="p-0 overflow-hidden">
+          <ul className="divide-y divide-border">
+            {expenses.map((expense) => {
+              const category = categoryById.get(expense.category_id ?? "");
+              return (
+                <li key={expense.id} className="px-4 py-3 flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-sm text-foreground truncate">
+                      {category?.name ?? "Uncategorized"}
+                      {expense.note ? ` · ${expense.note}` : ""}
+                    </p>
+                    <p className="text-xs text-muted">{expense.occurred_on}</p>
+                  </div>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <p className="text-sm font-medium text-foreground">{formatCurrency(Number(expense.amount), currency)}</p>
+                    <Link href={`/expenses/${expense.id}/edit`} className="text-muted" aria-label="Edit expense">
+                      <Pencil className="h-4 w-4" />
+                    </Link>
+                    <DeleteExpenseButton id={expense.id} />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Card>
       )}
     </div>
   );

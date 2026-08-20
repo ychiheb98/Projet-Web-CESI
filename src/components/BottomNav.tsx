@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Home, Receipt, PiggyBank, Target, Settings } from "lucide-react";
+import { cn } from "@/lib/cn";
 
 const ITEMS = [
-  { href: "/dashboard", label: "Today", icon: "🏠" },
-  { href: "/expenses", label: "Expenses", icon: "🧾" },
-  { href: "/budgets", label: "Budgets", icon: "📊" },
-  { href: "/goals", label: "Goals", icon: "🎯" },
-  { href: "/settings", label: "Settings", icon: "⚙️" },
+  { href: "/dashboard", label: "Today", Icon: Home },
+  { href: "/expenses", label: "Expenses", Icon: Receipt },
+  { href: "/budgets", label: "Budgets", Icon: PiggyBank },
+  { href: "/goals", label: "Goals", Icon: Target },
+  { href: "/settings", label: "Settings", Icon: Settings },
 ] as const;
 
 export function BottomNav() {
@@ -17,18 +19,19 @@ export function BottomNav() {
   return (
     <nav className="sticky bottom-0 z-10 border-t border-border bg-surface pb-[env(safe-area-inset-bottom)]">
       <ul className="flex">
-        {ITEMS.map((item) => {
-          const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+        {ITEMS.map(({ href, label, Icon }) => {
+          const active = pathname === href || pathname.startsWith(`${href}/`);
           return (
-            <li key={item.href} className="flex-1">
+            <li key={href} className="flex-1">
               <Link
-                href={item.href}
-                className={`flex flex-col items-center gap-0.5 py-2.5 text-xs ${
-                  active ? "text-primary font-medium" : "text-muted"
-                }`}
+                href={href}
+                className={cn(
+                  "flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium",
+                  active ? "text-primary" : "text-muted"
+                )}
               >
-                <span className="text-lg leading-none" aria-hidden>{item.icon}</span>
-                {item.label}
+                <Icon className="h-5 w-5" strokeWidth={active ? 2.25 : 1.75} aria-hidden />
+                {label}
               </Link>
             </li>
           );

@@ -2,7 +2,12 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { X } from "lucide-react";
 import { createCategory, deleteCategory } from "@/lib/actions/categories";
+import { Card, CardTitle } from "@/components/ui/Card";
+import { Input, Select } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 import type { Category } from "@/lib/types";
 
 const COLORS = ["#f97316", "#3b82f6", "#8b5cf6", "#06b6d4", "#ec4899", "#10b981", "#eab308", "#6b7280"];
@@ -29,12 +34,12 @@ export function CategoriesManager({ categories }: { categories: Category[] }) {
   }
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-4 space-y-3">
-      <p className="font-medium text-foreground">Categories</p>
+    <Card className="space-y-3">
+      <CardTitle>Categories</CardTitle>
 
       <ul className="flex flex-wrap gap-2">
         {categories.map((c) => (
-          <li key={c.id} className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-sm">
+          <li key={c.id} className="flex items-center gap-1.5 rounded-full border border-border bg-surface-inset px-3 py-1.5 text-sm">
             <span className="h-2 w-2 rounded-full" style={{ backgroundColor: c.color }} />
             <span className="text-foreground">{c.name}</span>
             <button
@@ -42,33 +47,25 @@ export function CategoriesManager({ categories }: { categories: Category[] }) {
                 await deleteCategory(c.id);
                 router.refresh();
               }}
-              className="text-muted text-xs ml-1"
+              className="text-muted ml-0.5"
               aria-label={`Delete ${c.name}`}
             >
-              ×
+              <X className="h-3 w-3" />
             </button>
           </li>
         ))}
       </ul>
 
       <form onSubmit={onAdd} className="flex items-center gap-2">
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="New category"
-          required
-          className="flex-1 rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground"
-        />
-        <select value={color} onChange={(e) => setColor(e.target.value)} className="rounded-lg border border-border bg-surface px-2 py-2 text-sm">
+        <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="New category" required className="flex-1 py-2" />
+        <Select value={color} onChange={(e) => setColor(e.target.value)} className="w-16 py-2">
           {COLORS.map((c) => (
             <option key={c} value={c} style={{ color: c }}>●</option>
           ))}
-        </select>
-        <button type="submit" disabled={saving} className="rounded-lg bg-primary text-primary-foreground text-sm font-medium px-3 py-2 disabled:opacity-60">
-          Add
-        </button>
+        </Select>
+        <Button type="submit" disabled={saving} size="sm">Add</Button>
       </form>
-      {error && <p className="text-sm text-danger">{error}</p>}
-    </div>
+      {error && <Alert variant="danger">{error}</Alert>}
+    </Card>
   );
 }

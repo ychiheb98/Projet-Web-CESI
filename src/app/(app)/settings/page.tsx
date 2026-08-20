@@ -18,7 +18,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-semibold text-foreground">Settings</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-foreground">Settings</h1>
       <MfaSettings />
       <ProfileForm profile={profile} />
       <AlertSettingsForm settings={alertSettings} />

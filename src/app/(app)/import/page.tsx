@@ -8,7 +8,7 @@ export default async function ImportPage() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold text-foreground mb-4">Import expenses</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-foreground mb-4">Import expenses</h1>
       <ImportClient categoryNames={(categories ?? []).map((c) => c.name)} />
     </div>
   );

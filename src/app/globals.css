@@ -1,46 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --surface: #ffffff;
-  --foreground: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --primary: #4f46e5;
+  --background: #0a0d0c;
+  --surface: #141917;
+  --surface-inset: #1b211e;
+  --foreground: #f5f6f5;
+  --muted: #93a09a;
+  --border: #232a26;
+
+  --primary: #34d399;
   --primary-foreground: #ffffff;
-  --success: #16a34a;
-  --warning: #d97706;
-  --danger: #dc2626;
+  --info: #60a5fa;
+  --info-foreground: #ffffff;
+  --success: #34d399;
+  --warning: #f59e0b;
+  --warning-foreground: #1c1204;
+  --danger: #f87171;
+  --danger-foreground: #ffffff;
+
+  --ring: var(--primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-inset: var(--surface-inset);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-success: var(--success);
   --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-ring: var(--ring);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0f1a;
-    --surface: #131a2b;
-    --foreground: #e5e9f0;
-    --muted: #8b94a7;
-    --border: #232c42;
-    --primary: #818cf8;
-    --primary-foreground: #0b0f1a;
-    --success: #4ade80;
-    --warning: #fbbf24;
-    --danger: #f87171;
-  }
 }
 
 * {
@@ -49,6 +50,7 @@
 
 html {
   scrollbar-gutter: stable;
+  color-scheme: dark;
 }
 
 body {

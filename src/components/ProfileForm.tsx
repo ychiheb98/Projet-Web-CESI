@@ -3,6 +3,10 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { updateProfile } from "@/lib/actions/settings";
+import { Card, CardTitle } from "@/components/ui/Card";
+import { Input, Select, Label } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 import type { Profile } from "@/lib/types";
 
 const CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD", "CHF", "JPY"];
@@ -32,35 +36,32 @@ export function ProfileForm({ profile }: { profile: Profile }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-xl border border-border bg-surface p-4 space-y-3">
-      <p className="font-medium text-foreground">Profile</p>
-      <div>
-        <label className="block text-xs text-muted mb-1">Display name</label>
-        <input value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground" />
-      </div>
-      <div>
-        <label className="block text-xs text-muted mb-1">Currency</label>
-        <select value={currency} onChange={(e) => setCurrency(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground">
-          {CURRENCIES.map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label className="block text-xs text-muted mb-1">Timezone</label>
-        <input
-          value={timezone}
-          onChange={(e) => setTimezone(e.target.value)}
-          placeholder="e.g. Europe/Paris"
-          className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground"
-        />
-        <p className="text-xs text-muted mt-1">Used to figure out &ldquo;today&rdquo; and days left in the month.</p>
-      </div>
-      {error && <p className="text-sm text-danger">{error}</p>}
-      {saved && <p className="text-sm text-success">Saved.</p>}
-      <button type="submit" disabled={saving} className="rounded-lg bg-primary text-primary-foreground text-sm font-medium px-4 py-2 disabled:opacity-60">
-        {saving ? "Saving…" : "Save profile"}
-      </button>
-    </form>
+    <Card>
+      <form onSubmit={onSubmit} className="space-y-3">
+        <CardTitle>Profile</CardTitle>
+        <div>
+          <Label htmlFor="display-name">Display name</Label>
+          <Input id="display-name" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+        </div>
+        <div>
+          <Label htmlFor="currency">Currency</Label>
+          <Select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
+            {CURRENCIES.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor="timezone">Timezone</Label>
+          <Input id="timezone" value={timezone} onChange={(e) => setTimezone(e.target.value)} placeholder="e.g. Europe/Paris" />
+          <p className="text-xs text-muted mt-1.5">Used to figure out &ldquo;today&rdquo; and days left in the month.</p>
+        </div>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {saved && <Alert variant="success">Saved.</Alert>}
+        <Button type="submit" disabled={saving} size="sm">
+          {saving ? "Saving…" : "Save profile"}
+        </Button>
+      </form>
+    </Card>
   );
 }
