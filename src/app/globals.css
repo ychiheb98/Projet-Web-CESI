@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b0f1a;
+    --surface: #131a2b;
+    --foreground: #e5e9f0;
+    --muted: #8b94a7;
+    --border: #232c42;
+    --primary: #818cf8;
+    --primary-foreground: #0b0f1a;
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --danger: #f87171;
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px; /* prevents iOS Safari zoom-on-focus in PWA/standalone mode */
+}
