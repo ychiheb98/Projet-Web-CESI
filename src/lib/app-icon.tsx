@@ -21,7 +21,7 @@ export function renderAppIcon(size: number) {
             fontFamily: "sans-serif",
           }}
         >
-          $
+          S
         </span>
       </div>
     ),

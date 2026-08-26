@@ -14,12 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Budget",
+  title: "Solde",
   description: "Personal spending tracker with daily budget guidance and goal alerts.",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Budget",
+    title: "Solde",
   },
 };
 
