@@ -167,8 +167,9 @@ create table public.alert_log (
 );
 
 -- one alert of a given type per user per day, so the cron job never double-sends
+-- (cast anchored to UTC, not the session timezone, so it qualifies as immutable)
 create unique index alert_log_dedupe on public.alert_log (
-  user_id, alert_type, (sent_at::date)
+  user_id, alert_type, ((sent_at at time zone 'utc')::date)
 );
 
 alter table public.alert_log enable row level security;
