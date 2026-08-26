@@ -4,6 +4,17 @@ import { NextResponse, type NextRequest } from "next/server";
 const PUBLIC_PATHS = ["/login", "/signup", "/auth"];
 const MFA_CHALLENGE_PATH = "/login/mfa";
 
+// Rebuilds the request-headers override passed to NextResponse.next() from
+// the request's CURRENT headers (including any cookie updates already
+// applied to `request` by the time this is called) plus the nonce/CSP pair,
+// so Next.js can find the nonce when auto-tagging its own inline scripts.
+function withNonceHeaders(request: NextRequest, nonce: string, csp: string) {
+  const headers = new Headers(request.headers);
+  headers.set("x-nonce", nonce);
+  headers.set("Content-Security-Policy", csp);
+  return headers;
+}
+
 // Refreshes the Supabase auth cookie on every request, redirects signed-out
 // users to /login, and — this is the part that actually enforces two-factor
 // auth rather than just offering it in Settings — forces any session that
@@ -12,8 +23,8 @@ const MFA_CHALLENGE_PATH = "/login/mfa";
 // Without this check here, a password alone would be enough to reach
 // protected routes even with MFA "enabled".
 // Runs in proxy.ts (Next.js 16's renamed middleware).
-export async function updateSession(request: NextRequest) {
-  let response = NextResponse.next({ request });
+export async function updateSession(request: NextRequest, nonce: string, csp: string) {
+  let response = NextResponse.next({ request: { headers: withNonceHeaders(request, nonce, csp) } });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -27,7 +38,7 @@ export async function updateSession(request: NextRequest) {
           for (const { name, value } of cookiesToSet) {
             request.cookies.set(name, value);
           }
-          response = NextResponse.next({ request });
+          response = NextResponse.next({ request: { headers: withNonceHeaders(request, nonce, csp) } });
           for (const { name, value, options } of cookiesToSet) {
             response.cookies.set(name, value, options);
           }
@@ -67,5 +78,6 @@ export async function updateSession(request: NextRequest) {
     }
   }
 
+  response.headers.set("Content-Security-Policy", csp);
   return response;
 }
