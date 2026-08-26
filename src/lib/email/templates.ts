@@ -6,7 +6,7 @@ const wrap = (title: string, bodyHtml: string) => `
   <h1 style="font-size: 20px; margin: 0 0 12px;">${title}</h1>
   ${bodyHtml}
   <p style="font-size: 12px; color: #64748b; margin-top: 24px;">
-    You're getting this because email alerts are enabled in your Budget app settings. You can turn them off any time.
+    You're getting this because email alerts are enabled in your Solde settings. You can turn them off any time.
   </p>
 </div>`;
 
